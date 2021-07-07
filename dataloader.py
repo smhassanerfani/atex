@@ -15,17 +15,18 @@ class ATeX(Dataset):
 
     def _get_images_list(self):
         items_list = list()
-        class_names = list()
+        classes = list()
         counter = 0
         for root, dirs, files in os.walk(self.images_base, topdown=True):
             if counter == 0:
-                class_names = dirs
+                classes = dirs
+
             for file in files:
                 if file.endswith(".jpg"):
                     items_list.append({
                         "image": os.path.join(root, file),
                         "label": counter - 1,
-                        "class_name": class_names[counter - 1]
+                        "class_name": classes[counter - 1]
                     })
             counter += 1
         return items_list
