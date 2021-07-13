@@ -10,7 +10,7 @@ class ATeX(Dataset):
         self.split = split
         self.transform = transform
         self.images_base = os.path.join(self.rootdir, self.split)
-        self.items_list = self._get_images_list()
+        self.items_list, self.classes = self._get_images_list()
         self.as_gray = as_gray
 
     def _get_images_list(self):
@@ -29,7 +29,16 @@ class ATeX(Dataset):
                         "class_name": classes[counter - 1]
                     })
             counter += 1
-        return items_list
+        return items_list, classes
+
+    # @property
+    # def classes(self):
+    #     classes = list()
+    #     with os.scandir(self.images_base) as it:
+    #         for entry in it:
+    #             if entry.is_dir():
+    #                 classes.append(entry.name)
+    #     return classes
 
     def __getitem__(self, index):
         image_path = self.items_list[index]["image"]

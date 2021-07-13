@@ -21,7 +21,7 @@ transforms = transforms.Compose(transforms_list)
 dataset = ATeX(transform=transforms)
 atex = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 
-
+print(dataset.classes)
 # dataiter = iter(atex)
 # images, labels, class_names = dataiter.next()
 # print(class_names)
@@ -41,12 +41,9 @@ model.eval()
 
 labels_list = []
 features_list = []
-classes_list = []
 
 for inputs, labels, class_names in atex:
 
-    if class_names[0] not in classes_list:
-        classes_list.append(class_names[0])
     inputs = inputs.to(device)
     labels_list.append(labels.item())
     with torch.no_grad():
@@ -58,7 +55,6 @@ features = np.asarray(features_list)
 labels = np.asarray(labels_list)
 
 print(features.shape, labels.shape)
-print(classes_list)
 
 
 lda = LinearDiscriminantAnalysis(n_components=2)
@@ -68,4 +64,4 @@ X_r = lda.fit(features, labels).transform(features)
 # pca.fit(features)
 # X_r = pca.transform(features)
 
-plot_2d(X_r, labels, classes_list)
+plot_2d(X_r, labels, dataset.classes)
