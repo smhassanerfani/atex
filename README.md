@@ -13,3 +13,5 @@ The current version of this dataset contains:
 
 ## ATeX Related Projects
 * [ATLANTIS](https://github.com/smhassanerfani/atlantis) is a code used for downloading images from [Flickr](https://www.flickr.com) 
+
+### References
