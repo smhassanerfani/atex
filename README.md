@@ -12,4 +12,4 @@ The current version of this dataset contains:
 * Number of distinct water bodies
 
 ## ATeX Related Projects
-* [ATLANTIS](https://github.com/smhassanerfani/atlantis) is a code used for downlaoding images from [Flickr](https://www.flickr.com) 
+* [ATLANTIS](https://github.com/smhassanerfani/atlantis) is a code used for downloading images from [Flickr](https://www.flickr.com) 
