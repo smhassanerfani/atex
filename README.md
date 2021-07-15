@@ -24,7 +24,7 @@ The current version of this dataset contains:
 |Rapids|Turbulence of water and the white foam created by this turbulence, the water appearing to be moving quite quickly, and other areas close to these ‘rapids’ that appear more still|
 |Flood|The submergence of land not usually covered by water and where “stream flow is characteristically turbulent”(Nelson, 2016)|
 |Reservoir|A manmade lake that is created when a dam is built on a river.|
-|Swamp| “areas of land permanently saturated, or filled, with water. Many swamps are even covered by water. There are two main types of swamps: freshwater swamps and saltwater swamps"(National Geographic Society)|
+|Swamp| “Areas of land permanently saturated, or filled, with water. Many swamps are even covered by water. There are two main types of swamps: freshwater swamps and saltwater swamps"(National Geographic Society)|
 
 
 ## ATeX Related Projects
