@@ -9,7 +9,7 @@ The current version of this dataset contains:
 * Polygon annotations with attributes, annotation times, and foreground/background ordering
 * A total of **1,351** annotated images
 * **34** labels
-* **12** distinct water bodies
+* **15** distinct water bodies
 
 |Labels|Description|
 |---|---|
@@ -22,9 +22,11 @@ The current version of this dataset contains:
 |Lake|Relatively calm or still water with little to no blurring of reflections of the surrounding vegetation,terrain, or sky, and the waterbody being either opaque or transparent while also being generally clear of most surface vegetation that is common in other waterbodies like wetlands|
 |Wetland|“an area of land... either covered by water or saturated with water,” is “neither totally dry land nor totally underwear; they have characteristics of both” ([National Geographic Society](https://www.nationalgeographic.org/encyclopedia/wetland/))|
 |Rapids|Turbulence of water and the white foam created by this turbulence, the water appearing to be moving quite quickly, and other areas close to these ‘rapids’ that appear more still|
-|Flood|The submergence of land not usually covered by water and where “stream flow is characteristically turbulent”([Nelson](https://www.tulane.edu/~sanelson/Natural_Disasters/riversystems.htm))|
+|Flood|The submergence of land not usually covered by water and where “stream flow is characteristically turbulent”([Nelson](https://www.tulane.edu/~sanelson/Natural_Disasters/riversystems.htm))||
 |Reservoir|A manmade lake that is created when a dam is built on a river.|
 |Swamp| “Areas of land permanently saturated, or filled, with water. Many swamps are even covered by water. There are two main types of swamps: freshwater swamps and saltwater swamps"([National Geographic Society](https://www.nationalgeographic.org/encyclopedia/swamp/))|
+<img width="606" alt="Screen Shot 2021-07-15 at 2 40 11 PM" src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png">
+
 
 
 ## ATeX Related Projects
