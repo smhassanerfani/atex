@@ -32,10 +32,17 @@ The current version of this dataset contains:
 
 ### References
 Caryl-Sue. (2012, October 9). Waterfall. National Geographic Society. www.nationalgeographic.org/encyclopedia/waterfall/
+
 Caryl-Sue. (2013, December 12). Delta. National Geographic Society. https://www.nationalgeographic.org/encyclopedia/delta/
+
 Caryl-Sue & Evers, J. (2012, August 23). Estuary. National Geographic Society. https://www.nationalgeographic.org/encyclopedia/estuary/
+
 Copland, L. (2020, October 1). Properties of Glacial Ice and Glacier Classification. Reference Module in Earth Systems and Environmental Sciences, Elsevier, ISBN 9780124095489. https://doi.org/10.1016/B978-0-12-818234-5.00014-6
+
 National Geographic Society. (2012, September 12). Wetland. https://www.nationalgeographic.org/encyclopedia/wetland/
+
 Prof. Stephen A. Nelson. (2016, October 17). River Systems & Causes of Flooding. Tulane University. https://www.tulane.edu/~sanelson/Natural_Disasters/riversystems.htm
+
 Rutledge, K., Ramroop, K., Boudreau, D., McDaniel, M., Teng, S., Sprout, E., Costa, H., Hall, H., & Hunt, (2011, January 21). Swamp. National Geographic Society. https://www.nationalgeographic.org/encyclopedia/swamp/
+
 World of Phenomena. (2020, October 20). Hot Spring - Facts and Information.www.phenomena.org/geological/hotspring/
