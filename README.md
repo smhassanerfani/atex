@@ -9,7 +9,7 @@ The current version of this dataset contains:
 * Polygon annotations with attributes, annotation times, and foreground/background ordering
 * A total of **1,351** annotated images
 * **34** labels
-* Number of distinct water bodies
+* **12** distinct water bodies
 
 |Labels|Description|
 |---|---|
