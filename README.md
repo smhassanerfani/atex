@@ -2,7 +2,7 @@
 This is the respository for the ATex Dataset.
 
 ## Overview
-A benchmark for image textures analysis of water in different waterbodies.
+A benchmark for image textures analysis of water in different waterbodies. This texture analysis of water in different waterbodies contributes to the [ATLANTIS](https://github.com/smhassanerfani/atlantis) dataset.
 
 ## Dataset Statistics
 The current version of this dataset contains:
