@@ -8,7 +8,7 @@ A benchmark for image textures analysis of water in different waterbodies. This 
 The current version of this dataset contains:
 * Polygon annotations with attributes, annotation times, and foreground/background ordering
 * A total of **1,351** annotated images
-* **34** labels
+* **35** labels
 * **15** distinct water bodies
 
 |Labels|Description|
