@@ -5,7 +5,7 @@ def plot_2d(features, labels, classes):
 
     import matplotlib.patches as mpatches
 
-    cmap = plt.get_cmap('tab20c', lut=len(classes))
+    cmap = plt.get_cmap('tab20', lut=len(classes))
 
     fig, ax = plt.subplots()
 
