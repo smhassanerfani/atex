@@ -34,9 +34,9 @@ The current version of this dataset contains:
 <img width="500" alt="Screen Shot 2021-07-15 at 2 40 11 PM" src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png">
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png" width="300" />
-  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="300" /> 
-  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="300" />
+  <img src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png" width="33%" />
+  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="33%" /> 
+  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="33%" />
 </p>
 
 
@@ -45,4 +45,6 @@ The current version of this dataset contains:
 ## ATeX Related Projects
 * [ATLANTIS](https://github.com/smhassanerfani/atlantis) is a code used for downloading images from [Flickr](https://www.flickr.com) 
 
-### References
+### Citations
+Mohammad
+
