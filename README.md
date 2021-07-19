@@ -7,10 +7,11 @@ A benchmark for image textures analysis of water in different waterbodies. This 
 ## Dataset Statistics
 The current version of this dataset contains:
 * Polygon annotations with attributes, annotation times, and foreground/background ordering
-* A total of **1,351** annotated images
-* ATeX patches use **32 x 32** pixels
-    - **15** distinct water bodies
-* A total of **12,503** patches, divided up between training(**8,753**), validation(**1,252**), and testing(**2,498**)
+* ATeX patches use **32 x 32** pixels within **15** distinct waterbodies
+* A total of **12,503** patches 
+    - Training: **8,753**
+    - Validation: **1,252**
+    - Testing: **2,498**
 * **35** labels
 
 |Labels|Description|
