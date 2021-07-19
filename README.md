@@ -8,8 +8,10 @@ A benchmark for image textures analysis of water in different waterbodies. This 
 The current version of this dataset contains:
 * Polygon annotations with attributes, annotation times, and foreground/background ordering
 * A total of **1,351** annotated images
+* ATeX patches use **32 x 32** pixels
+    - **15** distinct water bodies
+* A total of **12,503** patches, divided up between training(**8,753**), validation(**1,252**), and testing(**2,498**)
 * **35** labels
-* **15** distinct water bodies
 
 |Labels|Description|
 |---|---|
@@ -27,7 +29,15 @@ The current version of this dataset contains:
 |River|Rivers tend to be long fast flowing of water from a high to a low elevation. When classifying a river, there should be a noticeable flow and is not standstill like a lake or a pond. The direction of the flow will tend to be from left to right or vice versa, because that is how rivers flow since waterbodies like sea or lake flow towards the coast. The colors of rivers can change due to the weather and soil makeup but blue, brown, and grey are the main ones. ([National Geographic Society](https://www.nationalgeographic.org/encyclopedia/river/))|
 |Sea|Sea or Oceans will have rough water and a noticeable horizon to indicate the mass size ofthe waterbody. The direction of the water will be from top to bottom of a photo (vice versa, depending on tide) which can be shown through rough waves. Seas consists of white water on the coastline due to waves crashing in and can be used as a noticeable sight of a sea. The white water also has a foam texture to it due to the bubbles formed. Seas will always be rough and will have a sharp look to it from the many directions and waves hitting each other.|
 |Snow|A white form of precipitation covering the top of most things in the area. Snow will always be white and has a fluffy look to it. Often seen in piles and lumps, it is never chunky but smooth and fragile. The snow will cover the whole surface and will be found on top of other objects. The snow also carries no reflection. No other water body will look like snow since white water has bubbles and snow is completely white. ([National Geographic Society](https://www.nationalgeographic.com/environment/article/avalanche-winter-general))|
-<img width="606" alt="Screen Shot 2021-07-15 at 2 40 11 PM" src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png">
+
+<img width="500" alt="Screen Shot 2021-07-15 at 2 40 11 PM" src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png">
+
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png" width="300" />
+  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="300" /> 
+  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="300" />
+</p>
+
 
 
 
