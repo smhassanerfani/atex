@@ -15,8 +15,8 @@ The current version of this dataset contains:
 * **35** labels
 
 <p float="left">
-  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/ATeX-300-100-tsne.gif" width="49%" />
-  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/ATeX-4-ae.gif" width="49%" /> 
+  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_tsne.gif" width="49%" />
+  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_ae.gif" width="49%" /> 
 </p>
 
 
