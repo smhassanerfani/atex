@@ -14,6 +14,13 @@ The current version of this dataset contains:
     - Testing: **2,498**
 * **35** labels
 
+<p float="left">
+  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/ATeX-300-100-tsne.gif" width="49%" />
+  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/ATeX-4-ae.gif" width="49%" /> 
+</p>
+
+
+<!-- 
 <img width="500" alt="Screen Shot 2021-07-15 at 2 40 11 PM" src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png">
 
 <p float="left">
@@ -21,7 +28,7 @@ The current version of this dataset contains:
   <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="33%" /> 
   <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="33%" />
 </p>
-
+ -->
 
 
 
