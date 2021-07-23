@@ -1,5 +1,5 @@
 # ATeX - [ATLANTIS](https://github.com/smhassanerfani/atlantis) TeXture Dataset
-This is the respository for the ATex Dataset.
+This is the respository for the ATeX Dataset. All labels are comprehensively described in [ATeX Wiki](https://github.com/smhassanerfani/atex/wiki).
 
 ## Overview
 A benchmark for image textures analysis of water in different waterbodies. This texture analysis of water in different waterbodies contributes to the [ATLANTIS](https://github.com/smhassanerfani/atlantis) dataset.
@@ -15,21 +15,9 @@ The current version of this dataset contains:
 * **35** labels
 
 <p float="left">
-  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_tsne.gif" width="49%" />
-  <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_ae.gif" width="49%" /> 
+    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_tsne.gif" width="49%" />
+    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_ae.gif" width="49%" /> 
 </p>
-
-
-<!-- 
-<img width="500" alt="Screen Shot 2021-07-15 at 2 40 11 PM" src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png">
-
-<p float="left">
-  <img src="https://user-images.githubusercontent.com/87332442/125840255-f9fa0e68-891c-4060-a935-ca3bb8f41ab2.png" width="33%" />
-  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="33%" /> 
-  <img src="https://user-images.githubusercontent.com/87332442/126213674-b3fc8734-f075-4c37-8f30-796901351e22.png" width="33%" />
-</p>
- -->
-
 
 
 ## ATeX Related Projects
