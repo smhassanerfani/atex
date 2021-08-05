@@ -5,26 +5,28 @@ import torch.nn as nn
 # Note: [-1, +1] --> nn.Tanh()
 
 
-class Autoenconder(nn.Module):
-    def __init__(self):
-        super().__init__()
+class AELinear(nn.Module):
+    def __init__(self, input_ftrs=1024, init_ftrs=128, latent_dim=2):
+        super(AELinear, self).__init__()
         self.encoder = nn.Sequential(
-            nn.Linear(1024, 128),
+            nn.Linear(in_features=input_ftrs, out_features=init_ftrs),
             nn.ReLU(),
-            nn.Linear(128, 64),
+            nn.Linear(in_features=init_ftrs, out_features=int(init_ftrs / 2)),
             nn.ReLU(),
-            nn.Linear(64, 12),
+            nn.Linear(in_features=int(init_ftrs / 2),
+                      out_features=int(init_ftrs / 4)),
             nn.ReLU(),
-            nn.Linear(12, 2)
+            nn.Linear(in_features=int(init_ftrs / 4), out_features=latent_dim)
         )
         self.decoder = nn.Sequential(
-            nn.Linear(2, 12),
+            nn.Linear(in_features=latent_dim, out_features=int(init_ftrs / 4)),
             nn.ReLU(),
-            nn.Linear(12, 64),
+            nn.Linear(in_features=int(init_ftrs / 4),
+                      out_features=int(init_ftrs / 2)),
             nn.ReLU(),
-            nn.Linear(64, 128),
+            nn.Linear(in_features=int(init_ftrs / 2), out_features=init_ftrs),
             nn.ReLU(),
-            nn.Linear(128, 1024),
+            nn.Linear(in_features=init_ftrs, out_features=input_ftrs),
             nn.Tanh()
         )
 
@@ -34,7 +36,7 @@ class Autoenconder(nn.Module):
         return decoded, encoded
 
 
-class AEConvNet(nn.Module):
+class AEConv(nn.Module):
     def __init__(self):
         super().__init__()
         # N, 1, 28, 28
