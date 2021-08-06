@@ -48,10 +48,22 @@ We used t-Distributed Stochastic Neighbor Embedding ([t-SNE](https://lvdmaaten.g
   </TR>
 </TABLE>
 
-## ATeX Related Projects
-* [ATLANTIS](https://github.com/smhassanerfani/atlantis) is a code used for downloading images from [Flickr](https://www.flickr.com) 
+## Experimental Rsults
+Three common performance metrics including Precision, Recall and F1-score are reported to evaluate the performance of the models on ATeX. Table 1 shows weighted average (averaging the support-weighted mean per label) of these three metrics on the test set. Accordingly, EffNet-B7, EffNet-B0 and ShuffleNet V2x1.0 provide the best results. Considering training time, ShuffleNet V2x1.0 can be presented as the most efficient network.
 
-### Citations
-Mohammad
+Table 1. The perfomance result on ATeX test set by well-known classification models.
+| Networks           | Training Time [h:mm:ss] | Learning Rate | Epochs | Accuracy  (Val) | Precision | Recall | F1-score |
+|--------------------|-------------------------|---------------|--------|-----------------|-----------|--------|----------|
+| Wide ResNet-50-2   | 0:06:56                 | 2.50E-04      | 30     | 91              | 77        | 75     | 75       |
+| VGG-16             | 0:04:38                 | 2.50E-04      | 30     | 90              | 75        | 72     | 72       |
+| SqueezeNet 1.0     | 0:00:47                 | 7.50E-04      | 30     | 82              | 81        | 81     | 81       |
+| ShuffleNet V2 x1.0 | 0:01:46                 | 1.00E-02      | 30     | 90              | 90        | 90     | 90       |
+| ResNeXt-50-32x4d   | 0:03:15                 | 2.50E-04      | 30     | 90              | 77        | 75     | 75       |
+| ResNet-18          | 0:01:28                 | 2.50E-04      | 30     | 87              | 74        | 72     | 72       |
+| MobileNet V2       | 0:01:35                 | 2.50E-04      | 30     | 88              | 74        | 72     | 72       |
+| GoogleNet          | 0:01:51                 | 5.00E-03      | 30     | 89              | 88        | 88     | 88       |
+| EfficientNet-B7    | 0:12:42                 | 1.00E-02      | 30     | 90              | 91        | 91     | 91       |
+| EfficientNet-B0    | 0:02:38                 | 7.50E-03      | 30     | 91              | 90        | 90     | 90       |
+| Densenet-161       | 0:06:15                 | 2.50E-04      | 30     | 91              | 81        | 79     | 79       |
 
 
