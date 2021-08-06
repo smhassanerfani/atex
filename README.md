@@ -20,8 +20,8 @@ The current version of this dataset contains:
 </p>
 
 <p float="left">
-    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/LDA.svg" width="49%" />
-    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/LDA.svg" width="49%" /> 
+    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/LDAv3.svg" width="49%" />
+    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/PCAv3.svg" width="49.2%" /> 
 </p>
 
 ## ATeX Related Projects
