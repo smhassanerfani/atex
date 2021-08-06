@@ -45,6 +45,5 @@ for inputs, labels, class_names in atex:
 features = np.asarray(features_list)
 labels = np.asarray(labels_list)
 
-np.savetxt('./outputs/train_tsne2d_shufflenet_ftrs.txt',
-           features, delimiter=',')
-np.savetxt('./outputs/train_tsne2d_shufflenet_lbls.txt', labels, delimiter=',')
+np.savetxt('./outputs/train_shufflenet_ftrs.txt', features, delimiter=',')
+np.savetxt('./outputs/train_shufflenet_lbls.txt', labels, delimiter=',')
