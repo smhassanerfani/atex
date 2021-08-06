@@ -13,7 +13,7 @@ transforms_list = [transforms.ToTensor(), transforms.Normalize(*mean_std)]
 transforms = transforms.Compose(transforms_list)
 
 dataset = ATeX(transform=transforms)
-atex = DataLoader(dataset, batch_size=64, shuffle=True, drop_last=False)
+atex = DataLoader(dataset, batch_size=64, shuffle=False, drop_last=False)
 
 
 model = initialize_model("shufflenet", 15)
