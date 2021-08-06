@@ -4,7 +4,6 @@
 from __future__ import print_function
 
 import matplotlib as mpl
-mpl.use('Agg')
 import matplotlib.pyplot as plt
 plt.rcParams['image.cmap'] = 'tab20'
 from matplotlib.animation import FuncAnimation
@@ -12,6 +11,7 @@ import matplotlib.patches as mpatches
 
 
 def init_plot(classes):
+    mpl.use('Agg')
     cmap = plt.get_cmap(lut=len(classes))
     fig, ax = plt.subplots()
     fig.set_figheight(10)
@@ -72,7 +72,7 @@ def scatter(Y, labels):
     plt.show()
 
 
-def plot_2d(features, labels, classes):
+def plot_2d(features, labels, classes, legend=True):
 
     import matplotlib.patches as mpatches
 
@@ -86,5 +86,8 @@ def plot_2d(features, labels, classes):
                for idx, name in enumerate(classes)]
 
     ax.scatter(features[:, 0], features[:, 1], 50, labels, cmap=cmap)
-    ax.legend(handles=patches, loc='upper right')
+    if legend:
+        # ax.legend(handles=patches, loc='upper right')
+        ax.legend(handles=patches, prop={"size": 14}, bbox_to_anchor=(
+            0., -.12, 1., 0.), loc='lower left', ncol=5, mode="expand", borderaxespad=0.)
     plt.show()
