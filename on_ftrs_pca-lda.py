@@ -10,9 +10,9 @@ features = np.loadtxt('./outputs/train_shufflenet_ftrs.txt', delimiter=',')
 labels = np.loadtxt('./outputs/train_shufflenet_lbls.txt', delimiter=',')
 
 
-lda = LinearDiscriminantAnalysis(n_components=2)
-X_r = lda.fit(features, labels).transform(features)
-plot_2d(X_r, labels, dataset.classes)
+# lda = LinearDiscriminantAnalysis(n_components=2)
+# X_r = lda.fit(features, labels).transform(features)
+# plot_2d(X_r, labels, dataset.classes, legend=True)
 
 pca = PCA(2)
 pca.fit(features)
