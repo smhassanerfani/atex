@@ -15,7 +15,7 @@ Considering the combination of the aforementioned water properties, water can ap
 
 <p align="center">
   <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_pipeline.png">
-  Figure 2. ATeX patches are derived from [ATLANTIS](https://github.com/smhassanerfani/atlantis). The boundary waterbodies are determined from images using correspoing ground-truth masks (STEP 1), then the irrelevant pixels are cut based on waterbodies' coordination (STEP 2), finally the outputs are cropped 32 x 32 to create ATeX patches (STEP 3).
+  Figure 2. ATeX patches are derived from ATLANTIS. The boundary waterbodies are determined from images using correspoing ground-truth masks (STEP 1), then the irrelevant pixels are cut based on waterbodies' coordination (STEP 2), finally the outputs are cropped 32 x 32 to create ATeX patches (STEP 3).
 </p>
 
 ## Dataset Statistics
@@ -26,23 +26,32 @@ Figure 3 shows the frequency distribution of the number of images for waterbody 
   Figure 3. Frequency distribution of the number of images assigned to each waterbody label.
 </p>
 
+## ATeX Visualization
+We used t-Distributed Stochastic Neighbor Embedding ([t-SNE](https://lvdmaaten.github.io/tsne/)), Linear Auto Encoder (AE), Linear Discriminant Analysis ([LDA](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html)) and Principal Component Analysis ([PCA](https://www.youtube.com/watch?v=52d7ha-GdV8&list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E&index=11)) for dimensionality reduction. All of these methods are well suited for the visualization of high-dimensional datasets. In order to achieve better results, images of train set are first passed into the feature layers of [Shufflenet](https://arxiv.org/abs/1807.11164) (pre-trained on ImageNet and fine-tuned on ATeX), then the output results were fed into the features reduction models. Figure 4 (a) shows animation for the t-SNE result on features extracted form ShuffleNet V2x1.0, Figure 4 (b) shows animation for the AE result on those. Figure 4 (c) and (d) are the results for LDA and PCA, respectively.
 
-
-
-## Unsupervised Analysis
-<p float="left">
-    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_tsne.gif" width="49%" />
-    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_ae.gif" width="49%" /> 
-</p>
-
-<p float="left">
-    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/LDAv3.svg" width="49%" />
-    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/PCAv3.svg" width="49.2%" /> 
-</p>
+<TABLE>
+  <TR>
+     <TD><img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_tsne.gif" width="100%" /></TD>
+     <TD><img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_ae.gif" width="100%" /></TD>
+  </TR>
+  <TR>
+     <TD align="center">(a)</TD>
+     <TD align="center">(b)</TD>
+  </TR>
+  <TR>
+     <TD><img src="https://github.com/smhassanerfani/atex/blob/main/wiki/LDAv3.svg" width="100%" /></TD>
+     <TD><img src="https://github.com/smhassanerfani/atex/blob/main/wiki/PCAv3.svg" width="100%" /></TD>
+  </TR>
+  <TR>
+     <TD align="center">(c)</TD>
+     <TD align="center">(d)</TD>
+  </TR>
+</TABLE>
 
 ## ATeX Related Projects
 * [ATLANTIS](https://github.com/smhassanerfani/atlantis) is a code used for downloading images from [Flickr](https://www.flickr.com) 
 
 ### Citations
 Mohammad
+
 
