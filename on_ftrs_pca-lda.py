@@ -6,8 +6,8 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from utils.visualize import plot_2d
 
 dataset = ATeX()
-features = np.loadtxt('./outputs/train_tsne2d_shufflenet_ftrs.txt', delimiter=',')
-labels = np.loadtxt('./outputs/train_tsne2d_shufflenet_lbls.txt', delimiter=',')
+features = np.loadtxt('./outputs/train_shufflenet_ftrs.txt', delimiter=',')
+labels = np.loadtxt('./outputs/train_shufflenet_lbls.txt', delimiter=',')
 
 
 lda = LinearDiscriminantAnalysis(n_components=2)
