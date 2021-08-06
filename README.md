@@ -19,6 +19,10 @@ The current version of this dataset contains:
     <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_ae.gif" width="49%" /> 
 </p>
 
+<p float="left">
+    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/LDA.svg" width="49%" />
+    <img src="https://github.com/smhassanerfani/atex/blob/main/wiki/LDA.svg" width="49%" /> 
+</p>
 
 ## ATeX Related Projects
 * [ATLANTIS](https://github.com/smhassanerfani/atlantis) is a code used for downloading images from [Flickr](https://www.flickr.com) 
