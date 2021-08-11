@@ -24,7 +24,7 @@ for k in tqdm(k_choices, desc='KNN Progress'):
 
     # use of k-nearest-neighbor algorithm
     classifier.train(X_train, y_train)
-    y_pred = classifier.predict(X_val, k=k, method="l2norm")
+    y_pred = classifier.predict(X_val, k=k, method="l2n")
 
     # Compute the fraction of correctly predicted examples
     num_correct = np.sum(y_pred == y_val)

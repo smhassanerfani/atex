@@ -38,11 +38,11 @@ class KNearestNeighbor(object):
     """
     if (method == "kld" or method == 0):
       dists = self.compute_distances_kld(X)
-    elif (method == "chi2" or method == 1):
+    elif (method == "ch2" or method == 1):
       dists = self.compute_distances_chi2(X)
     elif (method == "llv" or method == 2):
       dists = self.compute_distances_llv(X)
-    elif (method == "l2norm" or method == 3):
+    elif (method == "l2n" or method == 3):
       dists = self.compute_distances_l2norm(X)
     else:
       raise ValueError('Invalid value %d for method' % method)
