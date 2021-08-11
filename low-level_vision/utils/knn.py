@@ -49,22 +49,6 @@ class KNearestNeighbor(object):
 
     return self.predict_labels(dists, k=k)
 
-  # def kullback_leibler_divergence(self, p, q):
-  #   p = np.asarray(p)
-  #   q = np.asarray(q)
-  #   # filt = np.logical_and(p != 0, q != 0)
-  #   return np.sum(p * np.log2(p / q), axis=1)
-
-  # def chi_square_statistics(self, p, q):
-  #   p = np.asarray(p)
-  #   q = np.asarray(q)
-  #   return np.sum(((p - q) ** 2) / (p + q), axis=1)
-
-  # def log_likelihood_statistics(self, p, q):
-  #   p = np.asarray(p)
-  #   q = np.asarray(q)
-  #   return - np.sum((p * np.log2(q)), axis=1)
-
   def compute_distances_kld(self, X):
     """
     kullback_leibler_divergence
