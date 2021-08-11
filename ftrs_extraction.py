@@ -12,7 +12,7 @@ mean_std = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 transforms_list = [transforms.ToTensor(), transforms.Normalize(*mean_std)]
 transforms = transforms.Compose(transforms_list)
 
-dataset = ATeX(transform=transforms)
+dataset = ATeX(split="train", transform=transforms)
 atex = DataLoader(dataset, batch_size=64, shuffle=False, drop_last=False)
 
 
