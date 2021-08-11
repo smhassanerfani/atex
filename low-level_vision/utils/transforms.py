@@ -1,6 +1,6 @@
+import numpy as np
 
 def img_norm(dataset, as_gray=False):
-    import numpy as np
 
     shape = dataset.shape
     dataset = dataset.reshape(dataset.shape[0], -1)
@@ -19,3 +19,26 @@ def rgb2hsv(dataset):
     from skimage.color import rgb2hsv
 
     return rgb2hsv(dataset)
+
+
+def kernel3C(gkernel):
+    arrays = [kernel for _ in range(3)]
+    return np.stack(arrays, axis=2)
+
+
+def power(image, kernel, norm=False, as_gray=False):
+    from scipy import ndimage as ndi
+
+    if norm:
+        image = img_norm(image, as_gray=as_gray)
+    if as_gray:
+        real_feature = ndi.convolve(image, np.real(kernel), mode='wrap')
+        imag_feature = ndi.convolve(image, np.imag(kernel), mode='wrap')
+    else:
+        kernel = kernel3C(kernel)
+        real_feature = ndi.convolve(
+            image, np.real(kernel), mode='wrap')[:, :, 1]
+        imag_feature = ndi.convolve(
+            image, np.imag(kernel), mode='wrap')[:, :, 1]
+
+    return np.sqrt(real_feature**2 + imag_feature**2)
