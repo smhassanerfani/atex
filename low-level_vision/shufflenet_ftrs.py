@@ -2,16 +2,16 @@ import numpy as np
 from utils.knn import KNearestNeighbor
 from tqdm import tqdm
 import os
-from sklearn.decomposition import PCA
+
 
 root = "/home/serfani/Documents/atex/outputs"
 X_train = np.loadtxt(os.path.join(
-    root, 'train_shufflenet_ftrs.txt'), dtype=np.float64, delimiter=',')
+    root, 'train_shufflenet_ftrs.txt'), delimiter=',')
 y_train = np.loadtxt(os.path.join(
     root, 'train_shufflenet_lbls.txt'), delimiter=',').astype(int)
 
 X_val = np.loadtxt(os.path.join(
-    root, 'val_shufflenet_ftrs.txt'), dtype=np.float64, delimiter=',')
+    root, 'val_shufflenet_ftrs.txt'), delimiter=',')
 y_val = np.loadtxt(os.path.join(
     root, 'val_shufflenet_lbls.txt'), delimiter=',').astype(int)
 
@@ -34,3 +34,26 @@ for k in tqdm(k_choices, desc='KNN Progress'):
 # Print the computed accuracies
 for k, acc in k_to_acc.items():
     print('k: %d \t accuracy: %f' % (k, acc))
+
+
+# from sklearn.decomposition import PCA
+# from sklearn.cluster import KMeans
+# import matplotlib.pyplot as plt
+
+# pca = PCA(n_components=100, random_state=88)
+# pca.fit(X_train)
+# x = pca.transform(X_train)
+
+
+# # KMeans to evaluate the inetria  # change the metric!
+# inertia_list = []
+# for k in range(20):
+#     kmn = KMeans(n_clusters=k, random_state=88)
+#     kmn.fit(x)
+#     pred = kmn.labels_
+#     inertia_list.append(kmn.inertia_)
+
+# fig, axes = plt.subplots(nrows=1, ncols=1)
+# axes.plot(np.arange(2, 16), inertia_list, 'o--')
+# plt.grid(True)
+# plt.show()
