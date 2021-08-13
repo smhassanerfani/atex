@@ -56,8 +56,8 @@ class AEConv3(nn.Module):
             nn.ReLU(),
             nn.ConvTranspose2d(16, 3, 3, stride=2, padding=1,
                                output_padding=1),  # N, 3, 32, 32
-            nn.Sigmoid()
-            # nn.Tanh()
+            # nn.Sigmoid()
+            nn.Tanh()
         )
 
     def forward(self, x):
