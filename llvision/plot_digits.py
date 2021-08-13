@@ -30,12 +30,15 @@ except ImportError as e:
     print("This example requires Pillow. Run `pip install pillow` and then try again.")
     sys.exit()
 
-
-from llvision.dataloader import dataloader
+from sklearn.decomposition import PCA
+from dataloader import dataloader
 atex = dataloader(as_gray=False, norm=False, hsv=True)
 
 data = atex["train"]["data"].reshape(8753, -1)
 labels = atex["train"]["target"].astype(int)
+
+pca = PCA(n_components=1024, random_state=88)
+data = pca.fit_transform(data)
 
 # Load digits data
 # data = np.loadtxt('./outputs/train_shufflenet_ftrs.txt', delimiter=',')
@@ -46,7 +49,7 @@ labels = atex["train"]["target"].astype(int)
 
 print(data.shape, labels.shape)
 print(labels)
-# exit()
+
 
 # Raw data is (0, 16), so scale to 8 bits (pillow can't handle 4-bit greyscale PNG depth)
 scaler = MinMaxScaler(feature_range=(0, 255))
@@ -88,7 +91,7 @@ print("Output graph examples to html")
 mapper.visualize(
     graph,
     title="Handwritten digits Mapper",
-    path_html="outputs/digits_custom_tooltips2.html",
+    path_html="/home/serfani/Documents/atex/outputs/digits_custom_tooltips_hsv.html",
     color_values=labels,
     color_function_name="labels",
     custom_tooltips=tooltip_s,
@@ -97,7 +100,7 @@ mapper.visualize(
 mapper.visualize(
     graph,
     title="Handwritten digits Mapper",
-    path_html="outputs/digits_ylabel_tooltips2.html",
+    path_html="/home/serfani/Documents/atex/outputs/digits_ylabel_tooltips_hsv.html",
     custom_tooltips=labels,
 )
 
