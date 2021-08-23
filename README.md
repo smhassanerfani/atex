@@ -72,7 +72,7 @@ Autoencoders are an unsupervised learning technique that we can use to learn eff
 
 <p align="center">
   <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/on_img_ae_results.svg">
-  Figure 4. .
+  Figure 4. Resutls for 1000 epochs. Each row (from bottom to top) shows the sample results from epoch 100 to 1000. 
 </p>
 
 
