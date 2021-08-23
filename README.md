@@ -66,4 +66,12 @@ Table 1. The perfomance result on ATeX test set by well-known classification mod
 | EfficientNet-B0    | 0:02:38                 | 7.50E-03      | 30     | 91              | 90        | 90     | 90       |
 | Densenet-161       | 0:06:15                 | 2.50E-04      | 30     | 91              | 81        | 79     | 79       |
 
+### Convolutional Autoencoder
+
+
+<p align="center">
+  <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/on_img_ae_results.svg">
+  Figure 3. Frequency distribution of the number of images assigned to each waterbody label.
+</p>
+
 
