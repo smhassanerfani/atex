@@ -68,10 +68,11 @@ Table 1. The perfomance result on ATeX test set by well-known classification mod
 
 ### Convolutional Autoencoder
 
+Autoencoders are an unsupervised learning technique that we can use to learn efficient data encodings. Basically, autoencoders can learn to map input data to the output data. While doing so, they learn to encode the data. And the output is the compressed representation of the input data ([Autoencoders in Deep Learning](https://debuggercafe.com/autoencoders-in-deep-learning/)). We developed Convolutional Autoencoder including three encoder and three decoder 2D convolution layers. 
 
 <p align="center">
   <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/on_img_ae_results.svg">
-  Figure 3. Frequency distribution of the number of images assigned to each waterbody label.
+  Figure 4. .
 </p>
 
 
