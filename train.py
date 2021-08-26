@@ -1,17 +1,12 @@
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torchvision import transforms
+from torch.utils.data import DataLoader
 from torch.optim import lr_scheduler
-import numpy as np
-import torchvision
-import matplotlib.pyplot as plt
-
-
-import os
-from torchvision import models, transforms
 from torchsummary import summary
 
-from torch.utils.data import DataLoader
 from dataloader import ATeX
 from utils.initialize_model import initialize_model
 from utils.engines import train_model
@@ -28,8 +23,7 @@ dataset = {x: ATeX(split=x, transform=transforms) for x in ['train', 'val']}
 atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
                       drop_last=False) for x in ['train', 'val']}
 
-dataset_size = {x: len(dataset[x]) for x in ['train', 'val']}
-class_names = dataset['train'].classes
+# class_names = dataset['train'].classes
 # print(class_names)
 
 model_name = "resnet"
