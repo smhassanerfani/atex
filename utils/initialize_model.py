@@ -75,6 +75,20 @@ def initialize_model(model_name, num_classes, feature_extract=False, use_pretrai
         # Handle the primary net
         num_ftrs = model_ft.fc.in_features
         model_ft.fc = nn.Linear(num_ftrs, num_classes)
+    
+    elif model_name == "efficientnet-b0":
+        """ EfficientNet-B0
+        """
+        from efficientnet_pytorch import EfficientNet
+        model_ft = EfficientNet.from_pretrained(
+            'efficientnet-b0', num_classes=num_classes)
+    
+    elif model_name == "efficientnet-b7":
+        """ EfficientNet-B0
+        """
+        from efficientnet_pytorch import EfficientNet
+        model_ft = EfficientNet.from_pretrained(
+            'efficientnet-b7', num_classes=num_classes)
 
     else:
         print("Invalid model name, exiting...")
