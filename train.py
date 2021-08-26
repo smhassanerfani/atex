@@ -34,7 +34,6 @@ except FileExistsError:
     pass
 
 model = initialize_model(model_name, num_classes=15, use_pretrained=True)
-
 model = model.to(device)
 
 # MODEL INFORMATION
