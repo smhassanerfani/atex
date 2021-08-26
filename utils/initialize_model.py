@@ -75,14 +75,38 @@ def initialize_model(model_name, num_classes, feature_extract=False, use_pretrai
         # Handle the primary net
         num_ftrs = model_ft.fc.in_features
         model_ft.fc = nn.Linear(num_ftrs, num_classes)
-    
+
+    elif model_name == "googlenet":
+        model_ft = models.googlenet(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.fc.in_features
+        model_ft.fc = nn.Linear(num_ftrs, num_classes)
+
+    elif model_name == "resnext":
+        model_ft = models.resnext50_32x4d(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.fc.in_features
+        model_ft.fc = nn.Linear(num_ftrs, num_classes)
+
+    elif model_name == "wide_resnet":
+        model_ft = models.wide_resnet50_2(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.fc.in_features
+        model_ft.fc = nn.Linear(num_ftrs, num_classes)
+
+    elif model_name == "mobilenet":
+        model_ft = models.mobilenet_v2(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs, 15)
+
     elif model_name == "efficientnet-b0":
         """ EfficientNet-B0
         """
         from efficientnet_pytorch import EfficientNet
         model_ft = EfficientNet.from_pretrained(
             'efficientnet-b0', num_classes=num_classes)
-    
+
     elif model_name == "efficientnet-b7":
         """ EfficientNet-B0
         """
