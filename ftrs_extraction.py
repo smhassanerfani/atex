@@ -19,7 +19,7 @@ atex = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 
 model = initialize_model("shufflenet", 15)
 
-FILE = "outputs/shufflenet_v2_x1_0/model.pth"
+FILE = "outputs/models/shufflenet_v2_x1_0/model.pth"
 
 checkpoint = torch.load(FILE)
 model.load_state_dict(checkpoint['model_state'])
