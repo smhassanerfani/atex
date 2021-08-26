@@ -26,14 +26,14 @@ atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "resnet"
+model_name = "resnet-50"
 
 try:
     os.makedirs(os.path.join("./outputs/models", model_name))
 except FileExistsError:
     pass
 
-model = initialize_model(model_name, num_classes=15, use_pretrained=True)
+model = initialize_model("resnet-50", num_classes=15, use_pretrained=True)
 model = model.to(device)
 
 # MODEL INFORMATION
@@ -42,11 +42,11 @@ model = model.to(device)
 # exit()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=1.0e-2,
+optimizer = optim.SGD(model.parameters(), lr=2.5e-4,
                       momentum=0.9, weight_decay=0.0001)
 
 # optimizer = torch.optim.Adam(model.parameters(), lr=2.5e-4)
 # step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
 
 model = train_model(model, model_name, atex,
-                    criterion, optimizer, num_epochs=5)
+                    criterion, optimizer, num_epochs=30)

@@ -21,7 +21,7 @@ atex = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 class_names = dataset.classes
 # print(class_names)
 
-model_name = "resnet"
+model_name = "resnet-50"
 model = initialize_model(model_name, num_classes=15, use_pretrained=True)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=1.0e-2,
@@ -65,5 +65,5 @@ final_report = classification_report(y_true, y_pred, target_names=class_names)
 
 print(final_report)
 
-# with open(f".output/models/{model_name}/final_report.txt", "a") as fh:
+# with open(f".output/models/{model_name}/final_report.txt", "w") as fh:
 #     fh.write(final_report)
