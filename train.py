@@ -26,14 +26,14 @@ atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "resnet-50"
+model_name = "resnet-101"
 
 try:
     os.makedirs(os.path.join("./outputs/models", model_name))
 except FileExistsError:
     pass
 
-model = initialize_model("resnet-50", num_classes=15, use_pretrained=True)
+model = initialize_model(model_name, num_classes=15, use_pretrained=True)
 model = model.to(device)
 
 # MODEL INFORMATION

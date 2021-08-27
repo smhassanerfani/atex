@@ -21,7 +21,7 @@ atex = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 class_names = dataset.classes
 # print(class_names)
 
-model_name = "resnet-50"
+model_name = "resnet-101"
 model = initialize_model(model_name, num_classes=15, use_pretrained=True)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=1.0e-2,
