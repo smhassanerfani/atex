@@ -17,12 +17,24 @@ def csv_writer(model_name, log_list, fieldnames=None):
             fh_writer.writerow(item)
 
 
+def lr_poly(base_lr, iter, max_iter, power):
+    return base_lr * ((1 - float(iter) / max_iter) ** (power))
+
+
+def adjust_learning_rate(optimizer, lr):
+    optimizer.param_groups[0]['lr'] = lr
+    if len(optimizer.param_groups) > 1:
+        optimizer.param_groups[1]['lr'] = lr * 10
+
+
 def train_model(
         model,
         model_name,
         dataloader,
         criterion,
         optimizer,
+        base_lr,
+        batch_size=64,
         scheduler=None,
         num_epochs=30):
 
@@ -32,6 +44,7 @@ def train_model(
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
+    i_iter = 0
     log_list = list()
 
     for epoch in range(num_epochs):
@@ -69,6 +82,11 @@ def train_model(
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
+                        i_iter += batch_size
+                        lr = lr_poly(base_lr, i_iter, num_epochs *
+                                     len(dataloader["train"]) * batch_size, 0.9)
+                        adjust_learning_rate(optimizer, lr)
+
                         loss.backward()
                         optimizer.step()
 
@@ -83,7 +101,8 @@ def train_model(
             epoch_acc = running_corrects.double(
             ) / len(dataloader[phase].dataset)
 
-            print(f'{phase} loss:\t {epoch_loss:.4f}\t acc:\t {epoch_acc:.4f}')
+            print(
+                f'{phase} loss:\t {epoch_loss:.4f}\t acc:\t {epoch_acc:.4f}\t lr:\t {lr:.6f}')
 
             if phase == 'train':
                 log_dic["train_loss"] = epoch_loss
