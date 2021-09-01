@@ -76,6 +76,9 @@ def plot_2d(features, labels, classes, legend=True):
 
     import matplotlib.patches as mpatches
 
+    font = {'font.family': 'Times New Roman', 'font.size': 14}
+    plt.rcParams.update(**font)
+
     cmap = plt.get_cmap('tab20', lut=len(classes))
 
     fig, ax = plt.subplots()
