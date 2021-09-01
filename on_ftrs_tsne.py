@@ -2,7 +2,7 @@ import numpy as np
 from dataloader import ATeX
 from sklearn.manifold import TSNE
 from models.tsne import extract_sequence
-from utils.visualize import savegif
+from utils.visualize import savegif, plot_2d
 
 dataset = ATeX()
 features = np.loadtxt('./outputs/train_shufflenet_ftrs.txt', delimiter=',')
@@ -12,11 +12,22 @@ perplexity = 20
 learning_rate = 200
 n_iter = 300
 exploration_n_iter = 100
-method = "learning_rate"
+method = "barnes_hut"
 
-tsne = TSNE(perplexity=perplexity, learning_rate=learning_rate,
-            n_iter=n_iter, verbose=2, method=method)
+tsne = TSNE(
+    n_components=2,
+    perplexity=perplexity,
+    learning_rate=learning_rate,
+    n_iter=n_iter,
+    verbose=2,
+    method=method)
 tsne._EXPLORATION_N_ITER = exploration_n_iter
+
+ftrs_embedded = tsne.fit_transform(features)
+
+plot_2d(ftrs_embedded, labels, dataset.classes)
+
+exit()
 
 Y_seq = extract_sequence(tsne, features)
 
