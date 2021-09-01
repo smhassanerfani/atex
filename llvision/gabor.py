@@ -7,11 +7,16 @@ from tqdm import tqdm
 from skimage.filters import gabor_kernel
 from skimage.measure import block_reduce
 from utils.transforms import power
+from utils.visualization import plot_samples
 
-as_gray = True
+as_gray = False
 norm = False
 
 atex = dataloader(as_gray=as_gray, norm=norm, hsv=False)
+
+# plot_samples(atex, num_of_samples=10)
+# exit()
+
 
 X_train = atex["train"]["data"]
 y_train = atex["train"]["target"]
