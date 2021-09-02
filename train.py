@@ -13,7 +13,7 @@ from utils.engines import train_model
 
 from models.drn import ResNet101
 
-# RESTORE_FROM = "/home/serfani/Downloads/resnet101-imagenet.pth"
+RESTORE_FROM = "/home/serfani/Downloads/resnet101_imagenet.pth"
 # RESTORE_FROM = "/home/serfani/Downloads/fcn_resnet101_coco-7ecb50ca.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -24,13 +24,13 @@ transforms_list = [transforms.ToTensor(), transforms.Normalize(*mean_std)]
 transforms = transforms.Compose(transforms_list)
 
 dataset = {x: ATeX(split=x, transform=transforms) for x in ['train', 'val']}
-atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
+atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
                       drop_last=False) for x in ['train', 'val']}
 
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "wide_resnet"
+model_name = "resnet"
 
 try:
     os.makedirs(os.path.join("./outputs/models", model_name))
@@ -52,15 +52,15 @@ model = initialize_model(model_name, num_classes=15, use_pretrained=True)
 # print(model)
 
 
-# model = model.to(device)
+model = model.to(device)
 
 # MODEL INFORMATION
-summary(model, torch.zeros((64, 3, 32, 32)))
+# summary(model, torch.zeros((64, 3, 32, 32)))
 # print(model)
-exit()
+# exit()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=2.5e-4,
+optimizer = optim.SGD(model.parameters(), lr=2.5e-3,
                       momentum=0.9, weight_decay=0.0001)
 
 # optimizer = torch.optim.Adam(model.parameters(), lr=2.5e-4)
