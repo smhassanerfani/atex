@@ -75,8 +75,13 @@ def train_model(
                 # forward
                 # track history if only in train
                 with torch.set_grad_enabled(phase == 'train'):
-                    outputs = model(inputs)
-                    loss = criterion(outputs, labels)
+                    if "drn-101" in model_name:
+                        aux, outputs = model(inputs)
+                        loss = criterion(outputs, labels) + 0.4 * \
+                            criterion(aux, labels)
+                    else:
+                        outputs = model(inputs)
+                        loss = criterion(outputs, labels)
 
                     _, preds = torch.max(outputs, 1)
 
