@@ -21,10 +21,12 @@ def lr_poly(base_lr, iter, max_iter, power):
     return base_lr * ((1 - float(iter) / max_iter) ** (power))
 
 
-def adjust_learning_rate(optimizer, lr):
+def adjust_learning_rate(optimizer, base_lr, in_iter, max_iter, power):
+    lr = lr_poly(base_lr, in_iter, max_iter, power)
     optimizer.param_groups[0]['lr'] = lr
     if len(optimizer.param_groups) > 1:
         optimizer.param_groups[1]['lr'] = lr * 10
+    return lr
 
 
 def train_model(
@@ -36,7 +38,8 @@ def train_model(
         base_lr,
         batch_size=64,
         scheduler=None,
-        num_epochs=30):
+        num_epochs=30,
+        lr_pp=0.9):
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -44,7 +47,7 @@ def train_model(
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
-    i_iter = 0
+    in_iter = 0
     log_list = list()
 
     for epoch in range(num_epochs):
@@ -87,10 +90,9 @@ def train_model(
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
-                        i_iter += batch_size
-                        lr = lr_poly(base_lr, i_iter, num_epochs *
-                                     len(dataloader["train"]) * batch_size, 0.9)
-                        adjust_learning_rate(optimizer, lr)
+                        in_iter += inputs.shape[0]
+                        lr = adjust_learning_rate(
+                            optimizer, base_lr, in_iter, num_epochs * len(dataloader[phase].dataset), lr_pp)
 
                         loss.backward()
                         optimizer.step()

@@ -33,7 +33,7 @@ atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
 model_name = "resnet"
 
 try:
-    os.makedirs(os.path.join("./outputs/models", model_name))
+    os.makedirs(os.path.join("./outputs/models", model_name + "_v2"))
 except FileExistsError:
     pass
 
