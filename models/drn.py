@@ -75,8 +75,20 @@ class ResNet(nn.Module):
         self.layer4 = self._make_layer(
             block, 512, layers[3], stride=1, dilation=4, multi_grid=(1, 1, 1))
 
-        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-        self.fc = nn.Linear(512 * 4, num_classes)
+        self.head = nn.Sequential(
+            nn.AdaptiveAvgPool2d((1, 1)),
+            nn.Flatten(),
+            nn.Linear(512 * 4, num_classes))
+
+        self.dsn = nn.Sequential(
+            nn.Conv2d(1024, 512, kernel_size=3, stride=1, padding=1),
+            BatchNorm2d(512),
+            nn.Dropout2d(0.1),
+            nn.AdaptiveAvgPool2d((1, 1)),
+            nn.Flatten(),
+            nn.Linear(512, num_classes)
+
+        )
 
     def forward(self, x):
         x = self.relu1(self.bn1(self.conv1(x)))
@@ -86,13 +98,12 @@ class ResNet(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
+        aux = self.dsn(x)
+
         x = self.layer4(x)
+        x = self.head(x)
 
-        x = self.avgpool(x)
-        x = x.reshape(x.shape[0], -1)
-        x = self.fc(x)
-
-        return x
+        return aux, x
 
     def _make_layer(self, block, planes, blocks, stride=1, dilation=1, multi_grid=1):
         identity_downsample = None
