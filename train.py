@@ -14,7 +14,7 @@ from utils.engines import train_model
 from models.drn import ResNet101
 
 RESTORE_FROM = "/home/serfani/Downloads/resnet101_imagenet.pth"
-# RESTORE_FROM = "/home/serfani/Downloads/fcn_resnet101_coco-7ecb50ca.pth"
+# RESTORE_FROM = "/home/serfani/Downloads/resnet101_coco.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
@@ -24,31 +24,32 @@ transforms_list = [transforms.ToTensor(), transforms.Normalize(*mean_std)]
 transforms = transforms.Compose(transforms_list)
 
 dataset = {x: ATeX(split=x, transform=transforms) for x in ['train', 'val']}
-atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
+atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
                       drop_last=False) for x in ['train', 'val']}
 
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "resnet"
+model_name = "drn-101"
 
 try:
-    os.makedirs(os.path.join("./outputs/models", model_name + "_v2"))
+    os.makedirs(os.path.join("./outputs/models", model_name))
 except FileExistsError:
     pass
 
-model = initialize_model(model_name, num_classes=15, use_pretrained=True)
-# model = ResNet101(img_channel=3, num_classes=15)
+# model = initialize_model(model_name, num_classes=15, use_pretrained=True)
+model = ResNet101(img_channel=3, num_classes=15)
 
-# saved_state_dict = torch.load(RESTORE_FROM)
-# new_params = model.state_dict().copy()
+saved_state_dict = torch.load(RESTORE_FROM)
 
-# for key, value in saved_state_dict.items():
-#     if (key.split(".")[0] not in ["head", "dsn", "fc"]):
-#         # print(key)
-#         new_params[key] = value
+new_params = model.state_dict().copy()
 
-# model.load_state_dict(new_params, strict=False)
+for key, value in saved_state_dict.items():
+    if (key.split(".")[0] not in ["head", "dsn", "fc"]):
+        # print(key)
+        new_params[key] = value
+
+model.load_state_dict(new_params)
 # print(model)
 
 
