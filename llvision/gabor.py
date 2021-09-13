@@ -10,8 +10,8 @@ from utils.transforms import power
 from utils.visualization import plot_samples
 import concurrent.futures
 
-as_gray = False
-norm = True
+as_gray = True
+norm = False
 
 atex = dataloader(as_gray=as_gray, norm=norm, hsv=False)
 
@@ -61,16 +61,18 @@ for mu in tqdm([0, 1, 2, 3, 4, 5, 6, 7], desc='mu'):
             _X_val = np.asarray(list(_X_val))
             gjet_val.append(_X_val)
 
+        # # without multiprocessing
         # # Mapping conv func of designed kernel on all images
         # _X_train = map(lambda x: power(x, kernel, as_gray=as_gray), X_train)
         # # Downsampling the conv layer output
-        # _X_train = map(lambda x: block_reduce(
-        #     x, (2, 2), func=np.max), _X_train)
+        # _X_train = map(lambda x: block_reduce(x, (2, 2), func=np.max), _X_train)
+        
         # _X_train = np.asarray(list(_X_train))
         # gjet_train.append(_X_train)
 
         # _X_val = map(lambda x: power(x, kernel, as_gray=as_gray), X_val)
         # _X_val = map(lambda x: block_reduce(x, (2, 2), func=np.max), _X_val)
+        
         # _X_val = np.asarray(list(_X_val))
         # gjet_val.append(_X_val)
 
