@@ -9,6 +9,7 @@ from skimage.measure import block_reduce
 from utils.transforms import power
 from utils.visualization import plot_samples
 import concurrent.futures
+import time
 
 as_gray = True
 norm = False
@@ -46,6 +47,7 @@ for mu in tqdm([0, 1, 2, 3, 4, 5, 6, 7], desc='mu'):
         frequency = (np.pi / 2) / (np.sqrt(2)) ** nu
         kernel = gabor_kernel(frequency, theta=theta,
                               sigma_x=sigma, sigma_y=sigma)
+        since = time.time()
         with concurrent.futures.ProcessPoolExecutor() as executor:
             # Mapping conv func of designed kernel on all images
             _X_train = executor.map(power_executer, X_train)
@@ -61,23 +63,26 @@ for mu in tqdm([0, 1, 2, 3, 4, 5, 6, 7], desc='mu'):
             _X_val = np.asarray(list(_X_val))
             gjet_val.append(_X_val)
 
+            time_elapsed = time.time() - since
+
         # # without multiprocessing
         # # Mapping conv func of designed kernel on all images
         # _X_train = map(lambda x: power(x, kernel, as_gray=as_gray), X_train)
         # # Downsampling the conv layer output
-        # _X_train = map(lambda x: block_reduce(x, (2, 2), func=np.max), _X_train)
-        
+        # _X_train = map(lambda x: block_reduce(
+        #     x, (2, 2), func=np.max), _X_train)
+
         # _X_train = np.asarray(list(_X_train))
         # gjet_train.append(_X_train)
 
         # _X_val = map(lambda x: power(x, kernel, as_gray=as_gray), X_val)
         # _X_val = map(lambda x: block_reduce(x, (2, 2), func=np.max), _X_val)
-        
+
         # _X_val = np.asarray(list(_X_val))
         # gjet_val.append(_X_val)
 
         print(
-            f"kernel size: {kernel.shape}, mu: {mu}, nu:{nu}, image size: {_X_train.shape}")
+            f"kernel size: {kernel.shape}, mu: {mu}, nu:{nu}, image size: {_X_train.shape}, process-time: {time_elapsed}")
 
 
 gjet_train = np.array(gjet_train)
