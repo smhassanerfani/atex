@@ -10,7 +10,7 @@ from utils.transforms import power
 from utils.visualization import plot_samples
 
 as_gray = False
-norm = False
+norm = True
 
 atex = dataloader(as_gray=as_gray, norm=norm, hsv=False)
 
@@ -34,16 +34,15 @@ for mu in tqdm([0, 1, 2, 3, 4, 5, 6, 7], desc='mu'):
         frequency = (np.pi / 2) / (np.sqrt(2)) ** nu
         kernel = gabor_kernel(frequency, theta=theta,
                               sigma_x=sigma, sigma_y=sigma)
-
-        _X_train = map(lambda x: power(
-            x, kernel, norm=norm, as_gray=as_gray), X_train)
+        # Mapping conv func of designed kernel on all images
+        _X_train = map(lambda x: power(x, kernel, as_gray=as_gray), X_train)
+        # Downsampling the conv layer output
         _X_train = map(lambda x: block_reduce(
             x, (2, 2), func=np.max), _X_train)
         _X_train = np.asarray(list(_X_train))
         gjet_train.append(_X_train)
 
-        _X_val = map(lambda x: power(
-            x, kernel, norm=norm, as_gray=as_gray), X_val)
+        _X_val = map(lambda x: power(x, kernel, as_gray=as_gray), X_val)
         _X_val = map(lambda x: block_reduce(x, (2, 2), func=np.max), _X_val)
         _X_val = np.asarray(list(_X_val))
         gjet_val.append(_X_val)
@@ -61,6 +60,8 @@ gjet_val = gjet_val.transpose(1, 2, 3, 0)
 X_train = gjet_train.reshape(gjet_train.shape[0], -1)
 X_val = gjet_val.reshape(gjet_val.shape[0], -1)
 
+print("X_train: ", X_train.shape)
+print("X_val: ", X_val.shape)
 
 pca = PCA(n_components=1024, random_state=88)
 X_train = pca.fit_transform(X_train)
