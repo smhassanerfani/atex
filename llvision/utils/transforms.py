@@ -21,16 +21,14 @@ def rgb2hsv(dataset):
     return rgb2hsv(dataset)
 
 
-def kernel3C(gkernel):
+def kernel3C(kernel):
     arrays = [kernel for _ in range(3)]
     return np.stack(arrays, axis=2)
 
 
-def power(image, kernel, norm=False, as_gray=False):
+def power(image, kernel, as_gray=False):
     from scipy import ndimage as ndi
 
-    if norm:
-        image = img_norm(image, as_gray=as_gray)
     if as_gray:
         real_feature = ndi.convolve(image, np.real(kernel), mode='wrap')
         imag_feature = ndi.convolve(image, np.imag(kernel), mode='wrap')
