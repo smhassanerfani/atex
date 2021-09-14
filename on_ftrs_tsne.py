@@ -8,10 +8,13 @@ dataset = ATeX()
 features = np.loadtxt('./outputs/train_shufflenet_ftrs.txt', delimiter=',')
 labels = np.loadtxt('./outputs/train_shufflenet_lbls.txt', delimiter=',')
 
+print(dataset.classes)
+# exit()
+
 perplexity = 20
 learning_rate = 200
-n_iter = 300
-exploration_n_iter = 100
+n_iter = 1000
+exploration_n_iter = 300
 method = "barnes_hut"
 
 tsne = TSNE(
@@ -23,11 +26,13 @@ tsne = TSNE(
     method=method)
 tsne._EXPLORATION_N_ITER = exploration_n_iter
 
+
 ftrs_embedded = tsne.fit_transform(features)
 
 plot_2d(ftrs_embedded, labels, dataset.classes)
-
+np.savetxt("./outputs/train_tsne_ftrs.txt", ftrs_embedded, delimiter=",")
 exit()
+
 
 Y_seq = extract_sequence(tsne, features)
 
