@@ -1,11 +1,14 @@
 import pickle
 import numpy as np
 from dataloader import ATeX
-import torch.nn as nn
+import torch
 import torch.optim as optim
 from torch.optim import lr_scheduler
+from torch.utils.data import DataLoader
 from models.ae import AELinear
 from utils.visualize import savegif
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 dataset = ATeX()
 features = np.loadtxt('./outputs/train_shufflenet_ftrs.txt', delimiter=',')
@@ -16,7 +19,7 @@ features = DataLoader(features, batch_size=64, shuffle=False, drop_last=False)
 
 
 model = AELinear()
-criterion = nn.MSELoss()
+criterion = torch.nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-5)
 scheduler = lr_scheduler.StepLR(optimizer, step_size=90, gamma=0.1)
 
