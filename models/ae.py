@@ -14,14 +14,14 @@ class AELinear(nn.Module):
             nn.Linear(in_features=init_ftrs, out_features=int(init_ftrs / 2)),
             nn.ReLU(),
             nn.Linear(in_features=int(init_ftrs / 2),
-                      out_features=int(init_ftrs / 4)),
+                      out_features=12),  # int(init_ftrs / 4)
             nn.ReLU(),
-            nn.Linear(in_features=int(init_ftrs / 4), out_features=latent_dim)
+            nn.Linear(in_features=12, out_features=latent_dim)
         )
         self.decoder = nn.Sequential(
-            nn.Linear(in_features=latent_dim, out_features=int(init_ftrs / 4)),
+            nn.Linear(in_features=latent_dim, out_features=12),
             nn.ReLU(),
-            nn.Linear(in_features=int(init_ftrs / 4),
+            nn.Linear(in_features=12,
                       out_features=int(init_ftrs / 2)),
             nn.ReLU(),
             nn.Linear(in_features=int(init_ftrs / 2), out_features=init_ftrs),
