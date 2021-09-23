@@ -2,8 +2,7 @@ import torch
 import numpy as np
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
-from models.shufflenet import FeatureExtractor as shuff_fe
-from models.vgg import FeatureExtractor as vgg_fe
+from models.fe import ShuffleNet_FE, VGG_FE
 from dataloader import ATeX
 from utils.initialize_model import initialize_model
 
@@ -17,19 +16,23 @@ transforms = transforms.Compose(transforms_list)
 dataset = ATeX(split="train", transform=transforms)
 atex = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 
+model_name = "shufflenet"
+model = initialize_model(model_name, 15)
 
-model = initialize_model("vgg", 15)
-
-FILE = "outputs/models/vgg/model.pth"
+FILE = f"outputs/models/{model_name}/model.pth"
 
 checkpoint = torch.load(FILE)
 model.load_state_dict(checkpoint['model_state'])
 
-new_model = vgg_fe(model)
+if model_name == "shufflenet":
+    new_model = ShuffleNet_FE(model)
+
+if model_name == "vgg":
+    new_model = VGG_FE(model)
 
 
-model.to(device)
-model.eval()
+new_model.to(device)
+new_model.eval()
 
 labels_list = []
 features_list = []
@@ -48,5 +51,5 @@ features = np.asarray(features_list)
 labels = np.asarray(labels_list)
 
 print(features.shape)
-np.savetxt('./outputs/train_vgg_ftrs.txt', features, delimiter=',')
-np.savetxt('./outputs/train_vgg_lbls.txt', labels, delimiter=',')
+# np.savetxt('./outputs/train_vgg_ftrs.txt', features, delimiter=',')
+# np.savetxt('./outputs/train_vgg_lbls.txt', labels, delimiter=',')
