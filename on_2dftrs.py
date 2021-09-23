@@ -144,15 +144,17 @@ for idx, name in enumerate(dataset.classes):
                 if lbl_ != n_clusters_ - 1:
                     ax.xaxis.set_visible(False)
 
-                sns.heatmap(X2[cluster_labels == lbl_],
+                sns.heatmap(X2[cluster_labels == (n_clusters_ - 1) - lbl_],
                             cmap="jet", cbar=False, ax=ax)
 
-                ax.set_yticks([0, len(X2[cluster_labels == lbl_])])
+                ax.set_yticks(
+                    [0, len(X2[cluster_labels == (n_clusters_ - 1) - lbl_])])
                 ax.set_yticklabels(
-                    (0, len(X2[cluster_labels == lbl_])), rotation=0)
-                ax.set_ylabel(f"{lbl_}", rotation=0)
+                    (0, len(X2[cluster_labels == (n_clusters_ - 1) - lbl_])), rotation=0)
+                ax.set_ylabel(f"{(n_clusters_ - 1) - lbl_}", rotation=0)
 
-                print(lbl_, len(X2[cluster_labels == lbl_]))
+                print(
+                    (n_clusters_ - 1) - lbl_, len(X2[cluster_labels == (n_clusters_ - 1) - lbl_]))
 
         # #############################################################################
         # Compute KMEANS
@@ -173,14 +175,17 @@ for idx, name in enumerate(dataset.classes):
                 if lbl_ != n_clusters - 1:
                     ax.axes.xaxis.set_visible(False)
 
-                sns.heatmap(X2[cluster_labels == lbl_],
+                sns.heatmap(X2[cluster_labels == (n_clusters_ - 1) - lbl_],
                             cmap="jet", cbar=False, ax=ax)
 
-                ax.axes.set_yticks([0, len(X2[cluster_labels == lbl_])])
-                ax.axes.set_yticklabels((0, len(X2[cluster_labels == lbl_])))
-                ax.axes.set_ylabel(f"{lbl_}", rotation=0)
+                ax.axes.set_yticks(
+                    [0, len(X2[cluster_labels == (n_clusters_ - 1) - lbl_])])
+                ax.axes.set_yticklabels(
+                    (0, len(X2[cluster_labels == (n_clusters_ - 1) - lbl_])))
+                ax.axes.set_ylabel(f"{(n_clusters_ - 1) - lbl_}", rotation=0)
 
-                print(lbl_, len(X2[cluster_labels == lbl_]))
+                print((n_clusters_ - 1) - lbl_,
+                      len(X2[cluster_labels == (n_clusters_ - 1) - lbl_]))
 
             # plt.savefig(f"./outputs/kmeans_results/heatmaps/{dataset.classes[idx]}_{n_clusters}", format="svg")
             # boxplot(X2, cluster_labels)
