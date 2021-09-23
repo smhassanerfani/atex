@@ -94,3 +94,77 @@ def plot_2d(features, labels, classes, legend=True):
         ax.legend(handles=patches, prop={"size": 14}, bbox_to_anchor=(
             0., -.12, 1., 0.), loc='lower left', ncol=5, mode="expand", borderaxespad=0.)
     plt.show()
+
+
+def set_axis_style(ax, labels):
+    ax.xaxis.set_tick_params(direction='out')
+    ax.xaxis.set_ticks_position('bottom')
+    ax.set_xticks(range(1, len(labels) + 1))
+    ax.set_xticklabels(labels, rotation=60)
+    ax.set_xlim(0.25, len(labels) + 0.75)
+    ax.set_xlabel('ATeX Labels')
+
+
+def boxplot(data, labels, labels_name=None, violinplot=True):
+
+    font = {'font.family': 'Times New Roman', 'font.size': 12}
+    plt.rcParams.update(**font)
+
+    cls_ftrs = []
+    for label in set(labels):
+        cls_ftrs.append(data[labels == label].flatten())
+
+    fig, ax = plt.subplots()
+
+    # ax.set_title("Box Plot")
+
+    bp = ax.boxplot(cls_ftrs)
+
+    for patch in bp['boxes']:
+        patch.set(color='#0000ff',
+                  linewidth=1,
+                  linestyle="-", alpha=0.5)
+
+    for whisker in bp['whiskers']:
+        whisker.set(color='#0000ff',
+                    linewidth=1.0,
+                    linestyle=":", alpha=0.5)
+
+    for cap in bp['caps']:
+        cap.set(color='#0000ff',
+                linewidth=1.0, alpha=0.8)
+
+    for median in bp['medians']:
+        median.set(color='red',
+                   linewidth=1.0)
+
+    # changing style of fliers
+    for flier in bp['fliers']:
+        flier.set(marker='D',
+                  markersize=1.0,
+                  markerfacecolor='green',
+                  markeredgecolor='none',
+                  alpha=0.8)
+
+    if violinplot:
+        # R: #ff0000 G: #00ff00 B: #0000ff
+        vp = ax.violinplot(cls_ftrs, showextrema=False)
+
+        # colors = [(0.0, 0.0, 0.0, 1.0),
+        #           (0.0, 0.6444666666666666, 0.7333666666666667, 1.0),
+        #           (0.7999666666666666, 0.9777666666666667, 0.0, 1.0),
+        #           (1, 0, 0, 1)]
+
+        # for pc, color in zip(vp['bodies'], colors):
+        #     pc.set_facecolor(color)
+        for pc in vp['bodies']:
+            pc.set_facecolor('#ab0000')
+            # pc.set_edgecolor('#D43F3A')
+            # pc.set_alpha(0.5)
+
+    if labels_name is not None:
+        set_axis_style(ax, labels_name)
+    else:
+        set_axis_style(ax, set(labels))
+
+    # plt.show()
