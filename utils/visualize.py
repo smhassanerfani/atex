@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 plt.rcParams['image.cmap'] = 'tab20'
 from matplotlib.animation import FuncAnimation
 import matplotlib.patches as mpatches
+import matplotlib.cm as cm
 
 
 def init_plot(classes):
@@ -107,14 +108,20 @@ def set_axis_style(ax, labels):
 
 def boxplot(data, labels, labels_name=None, violinplot=True):
 
-    font = {'font.family': 'Times New Roman', 'font.size': 12}
+    font = {'font.family': 'Times New Roman', 'font.size': 14}
     plt.rcParams.update(**font)
 
     cls_ftrs = []
+    colors = []
     for label in set(labels):
         cls_ftrs.append(data[labels == label].flatten())
+        if label == -1:
+            colors.append((1, 0, 0, 1))
+        else:
+            colors.append(cm.nipy_spectral(float(label) / len(set(labels))))
 
     fig, ax = plt.subplots()
+    fig.set_size_inches(6, 5)
 
     # ax.set_title("Box Plot")
 
@@ -149,16 +156,13 @@ def boxplot(data, labels, labels_name=None, violinplot=True):
     if violinplot:
         # R: #ff0000 G: #00ff00 B: #0000ff
         vp = ax.violinplot(cls_ftrs, showextrema=False)
+        # unique_labels = set(labels)
+        # colors = cm.nipy_spectral(float(unique_labels) / len(set(labels)))
 
-        # colors = [(0.0, 0.0, 0.0, 1.0),
-        #           (0.0, 0.6444666666666666, 0.7333666666666667, 1.0),
-        #           (0.7999666666666666, 0.9777666666666667, 0.0, 1.0),
-        #           (1, 0, 0, 1)]
-
-        # for pc, color in zip(vp['bodies'], colors):
-        #     pc.set_facecolor(color)
-        for pc in vp['bodies']:
-            pc.set_facecolor('#ab0000')
+        for pc, color in zip(vp['bodies'], colors):
+            pc.set_facecolor(color)
+        # for pc in vp['bodies']:
+        #     pc.set_facecolor('#ab0000')
             # pc.set_edgecolor('#D43F3A')
             # pc.set_alpha(0.5)
 
