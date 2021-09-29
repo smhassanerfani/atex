@@ -67,15 +67,18 @@ Y_seq = np.array(ftrs_per_epoch)
 with open('outputs/ae-lin8/atex_train_v2.pkl', 'wb') as f:
     pickle.dump(Y_seq, f)
 
-# with (open("outputs/ae-lin8/atex_train.pkl", "rb")) as openfile:
+# with (open("outputs/ae-lin8/atex_train_v2.pkl", "rb")) as openfile:
 #     Y_seq = pickle.load(openfile)
 
 # plot_2d(ftrs_list, labels, dataset.classes)
-# print(Y_seq.shape)
+
+X = Y_seq[:, :, 0]
+y = Y_seq[:, :, 1]
 
 lo = Y_seq.min(axis=0).min(axis=0).max()
 hi = Y_seq.max(axis=0).max(axis=0).min()
-limits = ([lo, hi], [lo, hi])
+limits = ([X.min(), X.max()], [y.min(), y.max()])
+print(limits)
 
 fig_name = "{dataset_name}-ae".format(dataset_name="ATeX")
 fig_path = "./outputs/ae-lin8/{file_name}.gif".format(file_name=fig_name)
