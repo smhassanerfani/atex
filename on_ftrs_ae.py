@@ -5,8 +5,9 @@ import torch
 import torch.optim as optim
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
+from utils.engines import adjust_learning_rate
 from models.ae import AELinear
-from utils.visualize import savegif
+from utils.visualize import savegif, plot_2d
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -17,26 +18,32 @@ labels = np.loadtxt('./outputs/train_shufflenet_lbls.txt', delimiter=',')
 features = torch.from_numpy(features.astype(np.float32))
 features = DataLoader(features, batch_size=64, shuffle=False, drop_last=False)
 
-
 model = AELinear()
-criterion = torch.nn.MSELoss()
-optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-5)
-scheduler = lr_scheduler.StepLR(optimizer, step_size=90, gamma=0.1)
 
 model.to(device)
 model.train()
 
 num_epochs = 300
 ftrs_per_epoch = []
+in_iter = 0
+base_lr = 1.25e-3
+
+criterion = torch.nn.MSELoss()
+optimizer = optim.Adam(model.parameters(), lr=base_lr, weight_decay=1.00e-5)
+# scheduler = lr_scheduler.StepLR(optimizer, step_size=90, gamma=0.1)
 
 for epoch in range(num_epochs):
     ftrs_list = []
     for idx, feature in enumerate(features):
         feature = feature.to(device)
+        optimizer.zero_grad()
+
         recon, ftrs = model(feature)
         loss = criterion(recon, feature)
 
-        optimizer.zero_grad()
+        in_iter += feature.shape[0]
+        lr = adjust_learning_rate(
+            optimizer, base_lr, in_iter, num_epochs * len(features.dataset), 0.9)
         loss.backward()
         optimizer.step()
 
@@ -45,25 +52,26 @@ for epoch in range(num_epochs):
             continue
         ftrs_list = np.vstack((ftrs_list, ftrs.cpu().detach().numpy()))
 
-    scheduler.step()
+    # scheduler.step()
     ftrs_list = np.asarray(ftrs_list)
 
     ftrs_per_epoch.append(ftrs_list)
     print(f"Epoch: {epoch+1}, Loss: {loss.item():.4f}")
 
-save_path = "./outputs/ae-lin8/model.pth"
+
+save_path = "./outputs/ae-lin8/model_v2.pth"
 torch.save(model.state_dict(), save_path)
 
 Y_seq = np.array(ftrs_per_epoch)
 
-with open('outputs/ae-lin8/atex_train.pkl', 'wb') as f:
+with open('outputs/ae-lin8/atex_train_v2.pkl', 'wb') as f:
     pickle.dump(Y_seq, f)
 
 # with (open("outputs/ae-lin8/atex_train.pkl", "rb")) as openfile:
 #     Y_seq = pickle.load(openfile)
 
-
-print(Y_seq.shape)
+# plot_2d(ftrs_list, labels, dataset.classes)
+# print(Y_seq.shape)
 
 lo = Y_seq.min(axis=0).min(axis=0).max()
 hi = Y_seq.max(axis=0).max(axis=0).min()
