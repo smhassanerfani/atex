@@ -26,14 +26,15 @@ model.train()
 num_epochs = 300
 ftrs_per_epoch = []
 in_iter = 0
-base_lr = 1.25e-3
+base_lr = 1.00e-3
 
 criterion = torch.nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=base_lr, weight_decay=1.00e-5)
-# scheduler = lr_scheduler.StepLR(optimizer, step_size=90, gamma=0.1)
+scheduler = lr_scheduler.StepLR(optimizer, step_size=90, gamma=0.1)
 
 for epoch in range(num_epochs):
     ftrs_list = []
+    tloss = 0.0
     for idx, feature in enumerate(features):
         feature = feature.to(device)
         optimizer.zero_grad()
@@ -41,28 +42,31 @@ for epoch in range(num_epochs):
         recon, ftrs = model(feature)
         loss = criterion(recon, feature)
 
-        in_iter += feature.shape[0]
-        lr = adjust_learning_rate(
-            optimizer, base_lr, in_iter, num_epochs * len(features.dataset), 0.9)
+        # in_iter += feature.shape[0]
+        # lr = adjust_learning_rate(
+        #     optimizer, base_lr, in_iter, num_epochs * len(features.dataset), 0.9)
         loss.backward()
         optimizer.step()
+        tloss += loss.item() * feature.shape[0]
 
         if idx == 0:
             ftrs_list = ftrs.cpu().detach().numpy()
             continue
         ftrs_list = np.vstack((ftrs_list, ftrs.cpu().detach().numpy()))
 
-    # scheduler.step()
+    tloss = tloss / len(features.dataset)
+    scheduler.step()
+
     ftrs_list = np.asarray(ftrs_list)
-
     ftrs_per_epoch.append(ftrs_list)
-    print(f"Epoch: {epoch+1}, Loss: {loss.item():.4f}")
+    print(f"Epoch: {epoch+1}, Loss: {tloss:.6f}")
 
 
-save_path = "./outputs/ae-lin8/model_v2.pth"
+save_path = "./outputs/ae-lin8/model.pth"
 torch.save(model.state_dict(), save_path)
 
 Y_seq = np.array(ftrs_per_epoch)
+print(Y_seq.shape)
 
 with open('outputs/ae-lin8/atex_train_v2.pkl', 'wb') as f:
     pickle.dump(Y_seq, f)
@@ -70,10 +74,15 @@ with open('outputs/ae-lin8/atex_train_v2.pkl', 'wb') as f:
 # with (open("outputs/ae-lin8/atex_train_v2.pkl", "rb")) as openfile:
 #     Y_seq = pickle.load(openfile)
 
+<<<<<<< HEAD
 # plot_2d(ftrs_list, labels, dataset.classes)
 
 X = Y_seq[:, :, 0]
 y = Y_seq[:, :, 1]
+=======
+plot_2d(ftrs_list, labels, dataset.classes)
+
+>>>>>>> Modified loss report for each epoch.
 
 lo = Y_seq.min(axis=0).min(axis=0).max()
 hi = Y_seq.max(axis=0).max(axis=0).min()
