@@ -74,18 +74,10 @@ with open('outputs/ae-lin8/atex_train_v2.pkl', 'wb') as f:
 # with (open("outputs/ae-lin8/atex_train_v2.pkl", "rb")) as openfile:
 #     Y_seq = pickle.load(openfile)
 
-<<<<<<< HEAD
-# plot_2d(ftrs_list, labels, dataset.classes)
+plot_2d(ftrs_list, labels, dataset.classes)
 
 X = Y_seq[:, :, 0]
 y = Y_seq[:, :, 1]
-=======
-plot_2d(ftrs_list, labels, dataset.classes)
-
->>>>>>> Modified loss report for each epoch.
-
-lo = Y_seq.min(axis=0).min(axis=0).max()
-hi = Y_seq.max(axis=0).max(axis=0).min()
 limits = ([X.min(), X.max()], [y.min(), y.max()])
 print(limits)
 
