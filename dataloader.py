@@ -46,7 +46,7 @@ class ATeX(Dataset):
         class_name = self.items_list[index]["class_name"]
 
         if self.as_gray:
-            image = Image.open(image_path).convert('LA')
+            image = Image.open(image_path).convert('L')
 
         else:
             image = Image.open(image_path).convert('RGB')
