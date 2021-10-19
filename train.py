@@ -13,8 +13,7 @@ from utils.engines import train_model
 
 from models.drn import ResNet101
 
-RESTORE_FROM = "/home/serfani/Downloads/resnet101_imagenet.pth"
-# RESTORE_FROM = "/home/serfani/Downloads/resnet101_coco.pth"
+RESTORE_FROM = "/home/serfani/Documents/atlantis/snapshots/resnet_state_dict/resnet101_imagenet.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
@@ -30,7 +29,7 @@ atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "drn-101"
+model_name = "drn-101_v2"
 
 try:
     os.makedirs(os.path.join("./outputs/models", model_name))
@@ -61,7 +60,7 @@ model = model.to(device)
 # exit()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=2.5e-3,
+optimizer = optim.SGD(model.parameters(), lr=2.5e-4,
                       momentum=0.9, weight_decay=0.0001)
 
 # optimizer = torch.optim.Adam(model.parameters(), lr=2.5e-4)
