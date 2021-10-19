@@ -18,15 +18,15 @@ from sklearn.preprocessing import StandardScaler
 font = {'font.family': 'Times New Roman', 'font.size': 14}
 plt.rcParams.update(**font)
 
-dataset = ATeX()
+dataset = ATeX(as_gray=False)
 atex = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 
 imgs = [np.array(atex.dataset[x][0]) for x in range(len(atex.dataset))]
 imgs = np.array(imgs)
 
 # Channel Selection
-imgs = imgs.transpose(0, 3, 1, 2)
-imgs = imgs[:, 0]
+# imgs = imgs.transpose(0, 3, 1, 2)
+# imgs = imgs[:, 2]
 print(imgs.shape)
 
 # DO NOT NEED THIS! USE `np.loadtxt`
