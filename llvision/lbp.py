@@ -4,7 +4,8 @@ from skimage.feature import local_binary_pattern as lbp
 from utils.knn import KNearestNeighbor
 from tqdm import tqdm
 
-atex = dataloader(as_gray=True, norm=False, hsv=False)
+rootdir="C:\\Users\\SERFANI\\Documents\\atex\\data\\atex"
+atex = dataloader(as_gray=True, norm=False, hsv=False, rootdir=rootdir)
 
 X_train = atex["train"]["data"]
 y_train = atex["train"]["target"]
@@ -38,7 +39,7 @@ for k in tqdm(k_choices, desc='KNN Progress'):
 
     # use of k-nearest-neighbor algorithm
     classifier.train(X_train, y_train)
-    y_pred = classifier.predict(X_val, k=k, method="kld")
+    y_pred = classifier.predict(X_val, k=k, method="llv")
 
     # Compute the fraction of correctly predicted examples
     num_correct = np.sum(y_pred == y_val)
