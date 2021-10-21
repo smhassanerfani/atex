@@ -36,19 +36,19 @@ def train_model(
         criterion,
         optimizer,
         base_lr,
-        batch_size=64,
+        pdlr=True,
         scheduler=None,
         num_epochs=30,
         lr_pp=0.9):
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
     in_iter = 0
     log_list = list()
+    lr = base_lr
 
     for epoch in range(num_epochs):
 
@@ -91,8 +91,9 @@ def train_model(
                     # backward + optimize only if in training phase
                     if phase == 'train':
                         in_iter += inputs.shape[0]
-                        lr = adjust_learning_rate(
-                            optimizer, base_lr, in_iter, num_epochs * len(dataloader[phase].dataset), lr_pp)
+                        if pdlr == True:
+                            lr = adjust_learning_rate(
+                                optimizer, base_lr, in_iter, num_epochs * len(dataloader[phase].dataset), lr_pp)
 
                         loss.backward()
                         optimizer.step()

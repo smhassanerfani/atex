@@ -5,18 +5,17 @@ import torch.optim as optim
 from torchvision import transforms
 from torch.utils.data import DataLoader
 from torch.optim import lr_scheduler
-from torchsummary import summary
+# from torchsummary import summary
 
 from dataloader import ATeX
 from utils.initialize_model import initialize_model
 from utils.engines import train_model
-
 from models.drn import ResNet101
 
-RESTORE_FROM = "/home/serfani/Documents/atlantis/snapshots/resnet_state_dict/resnet101_imagenet.pth"
+RESTORE_FROM = "./outputs/models_v2/resnet101_imagenet.pth"
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print(device)
+print(torch.cuda.get_device_name())
 
 mean_std = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 transforms_list = [transforms.ToTensor(), transforms.Normalize(*mean_std)]
@@ -29,26 +28,26 @@ atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "drn-101_v2"
+model_name = "shufflenet"
 
 try:
-    os.makedirs(os.path.join("./outputs/models", model_name))
+    os.makedirs(os.path.join("./outputs/models_v2", model_name))
 except FileExistsError:
     pass
 
-# model = initialize_model(model_name, num_classes=15, use_pretrained=True)
-model = ResNet101(img_channel=3, num_classes=15)
+model = initialize_model(model_name, num_classes=15, use_pretrained=True)
+# model = ResNet101(img_channel=3, num_classes=15)
 
-saved_state_dict = torch.load(RESTORE_FROM)
-
-new_params = model.state_dict().copy()
-
-for key, value in saved_state_dict.items():
-    if (key.split(".")[0] not in ["head", "dsn", "fc"]):
-        # print(key)
-        new_params[key] = value
-
-model.load_state_dict(new_params)
+# saved_state_dict = torch.load(RESTORE_FROM)
+#
+# new_params = model.state_dict().copy()
+#
+# for key, value in saved_state_dict.items():
+#     if (key.split(".")[0] not in ["head", "dsn", "fc"]):
+#         # print(key)
+#         new_params[key] = value
+#
+# model.load_state_dict(new_params)
 # print(model)
 
 
@@ -59,12 +58,13 @@ model = model.to(device)
 # print(model)
 # exit()
 
+base_lr = 1.0e-2
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=2.5e-4,
+optimizer = optim.SGD(model.parameters(), lr=base_lr,
                       momentum=0.9, weight_decay=0.0001)
 
 # optimizer = torch.optim.Adam(model.parameters(), lr=2.5e-4)
 # step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 
 model = train_model(model, model_name, atex,
-                    criterion, optimizer, 2.5e-4, scheduler=None, num_epochs=30)
+                    criterion, optimizer, base_lr, pdlr=False, scheduler=None, num_epochs=30)
