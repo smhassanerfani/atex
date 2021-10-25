@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from torch.optim import lr_scheduler
 # from torchsummary import summary
 
-from dataloader import ATeX
+from dataloader import ATeX, ToHSV
 from utils.initialize_model import initialize_model
 from utils.engines import train_model
 from models.drn import ResNet101
@@ -18,11 +18,26 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(torch.cuda.get_device_name())
 
 mean_std = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-transforms_list = [transforms.ToTensor(), transforms.Normalize(*mean_std)]
-transforms = transforms.Compose(transforms_list)
 
-dataset = {x: ATeX(split=x, transform=transforms) for x in ['train', 'val']}
-atex = {x: DataLoader(dataset[x], batch_size=64, shuffle=True,
+data_transforms = {
+    'train': transforms.Compose([
+        # ToHSV(),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomVerticalFlip(p=0.5),
+        transforms.ToTensor(),
+        transforms.Normalize(*mean_std)
+    ]),
+    'val': transforms.Compose([
+        # ToHSV(),
+        transforms.ToTensor(),
+        transforms.Normalize(*mean_std)
+    ]),
+}
+
+
+dataset = {x: ATeX(split=x, transform=data_transforms[x]) for x in [
+    'train', 'val']}
+atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
                       drop_last=False) for x in ['train', 'val']}
 
 # class_names = dataset['train'].classes
