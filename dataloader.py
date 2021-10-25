@@ -3,6 +3,12 @@ from PIL import Image
 import os
 
 
+class ToHSV:
+    def __call__(self, sample):
+        # inputs = sample
+        return sample.convert('HSV')
+
+
 class ATeX(Dataset):
     def __init__(self, rootdir="./data/atex", split="train", as_gray=False, transform=None):
         super(ATeX, self).__init__()
