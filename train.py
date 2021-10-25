@@ -46,7 +46,7 @@ atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
 model_name = "shufflenet"
 
 try:
-    os.makedirs(os.path.join("./outputs/models_v2", model_name))
+    os.makedirs(os.path.join("./outputs/models", model_name))
 except FileExistsError:
     pass
 
