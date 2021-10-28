@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import torch
 import torchvision.transforms as T
 
+# font = {'font.family': 'Times New Roman', 'font.size': 10}
+# plt.rcParams.update(**font)
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 SQUEEZENET_MEAN = np.array([0.485, 0.456, 0.406], dtype=np.float32)
@@ -46,6 +49,7 @@ def compute_saliency_maps(X, y, model):
     ##############################################################################
     # forward pass
     scores = model(X)
+    _, preds = torch.max(scores, 1)
     scores = (scores.gather(1, y.view(-1, 1)).squeeze())
 
     # backward pass
@@ -57,18 +61,19 @@ def compute_saliency_maps(X, y, model):
     ##############################################################################
     #                             END OF YOUR CODE                               #
     ##############################################################################
-    return saliency
+    return saliency, preds
 
 def show_saliency_maps(X, y, classes, model, model_name):
 
     # Compute saliency maps for images in X
-    saliency = compute_saliency_maps(X, y, model)
+    saliency, preds = compute_saliency_maps(X, y, model)
     X = [deprocess(x) for x in X]
     X = [x.detach().cpu().numpy().transpose(1, 2, 0) for x in X]
     y = y.detach().cpu().numpy()
     # Convert the saliency map from Torch Tensor to numpy array and show images
     # and saliency maps together.
     saliency = saliency.detach().cpu().numpy()
+    preds = preds.tolist()
     N = len(X)
 
     fig, axes = plt.subplots(nrows=2, ncols=N)
@@ -80,9 +85,11 @@ def show_saliency_maps(X, y, classes, model, model_name):
 
         axes[1, i].imshow(saliency[i], cmap=plt.cm.hot)
         axes[1, i].axis('off')
+        axes[1, i].set_title(classes[preds[i]])
 
     fig.suptitle(model_name)
-    plt.show()
+    # plt.show()
+    plt.savefig(f"./outputs/visualization/{model_name}.svg", dpi=150)
 
 
 def get_images_list(path):

@@ -11,11 +11,14 @@ images, labels, classes = get_images_list("outputs/visualization/128x128")
 X = torch.cat(images, dim=0).to(device)
 y = torch.cat(labels, dim=0).to(device)
 
-model_name = "resnext"
-model = initialize_model(model_name, 15)
+model_list = ["wide_resnet", "vgg", "squeezenet", "shufflenet", "resnext", "resnet", "mobilenet", "googlenet", "efficientnet-b7", "efficientnet-b0", "densenet"]
 
-FILE = f"outputs/models/{model_name}/model.pth"
-checkpoint = torch.load(FILE)
-model.load_state_dict(checkpoint['model_state'])
+for model_name in model_list:
+    # model_name =
+    model = initialize_model(model_name, num_classes=15, use_pretrained=True)
 
-show_saliency_maps(X, y, classes, model, model_name)
+    FILE = f"outputs/models_v2/{model_name}/model.pth"
+    checkpoint = torch.load(FILE)
+    model.load_state_dict(checkpoint['model_state'])
+
+    show_saliency_maps(X, y, classes, model, model_name)
