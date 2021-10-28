@@ -9,7 +9,7 @@ def csv_writer(model_name, log_list, fieldnames=None):
         fieldnames = ["epoch", "train_loss",
                       "train_acc", "val_loss", "val_acc"]
 
-    with open(f"./outputs/models/{model_name}/loss_acc_results.csv", 'w', newline='') as filehandler:
+    with open(f"./outputs/models_v2/{model_name}/loss_acc_results.csv", 'w', newline='') as filehandler:
         fh_writer = csv.DictWriter(filehandler, fieldnames=fieldnames)
 
         fh_writer.writeheader()
@@ -78,10 +78,15 @@ def train_model(
                 # forward
                 # track history if only in train
                 with torch.set_grad_enabled(phase == 'train'):
-                    if "drn-101" in model_name:
+                    if ("drn-101" in model_name):
                         aux, outputs = model(inputs)
                         loss = criterion(outputs, labels) + 0.4 * \
                             criterion(aux, labels)
+                    if ("googlenet" in model_name) and (phase == "train"):
+                        outputs, aux2, aux1 = model(inputs)
+                        loss = criterion(outputs, labels) + 0.2 * \
+                            criterion(aux2, labels) + 0.2 * \
+                            criterion(aux1, labels)
                     else:
                         outputs = model(inputs)
                         loss = criterion(outputs, labels)
@@ -131,7 +136,7 @@ def train_model(
                         "best_acc": epoch_acc,
                         # "scheduler_state": scheduler.state_dict()
                     }
-                    save_path = f"./outputs/models/{model_name}/model.pth"
+                    save_path = f"./outputs/models_v2/{model_name}/model.pth"
                     torch.save(state, save_path)
 
         log_list.append(log_dic)

@@ -34,7 +34,6 @@ data_transforms = {
     ]),
 }
 
-
 dataset = {x: ATeX(split=x, transform=data_transforms[x]) for x in [
     'train', 'val']}
 atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
@@ -43,10 +42,10 @@ atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "shufflenet"
+model_name = "googlenet"
 
 try:
-    os.makedirs(os.path.join("./outputs/models", model_name))
+    os.makedirs(os.path.join("./outputs/models_v2", model_name))
 except FileExistsError:
     pass
 
@@ -65,7 +64,6 @@ model = initialize_model(model_name, num_classes=15, use_pretrained=True)
 # model.load_state_dict(new_params)
 # print(model)
 
-
 model = model.to(device)
 
 # MODEL INFORMATION
@@ -73,7 +71,8 @@ model = model.to(device)
 # print(model)
 # exit()
 
-base_lr = 1.0e-2
+base_lr = 7.5e-3
+
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=base_lr,
                       momentum=0.9, weight_decay=0.0001)
@@ -82,4 +81,4 @@ optimizer = optim.SGD(model.parameters(), lr=base_lr,
 # step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 
 model = train_model(model, model_name, atex,
-                    criterion, optimizer, base_lr, pdlr=False, scheduler=None, num_epochs=30)
+                    criterion, optimizer, base_lr, pdlr=True, scheduler=None, num_epochs=30)
