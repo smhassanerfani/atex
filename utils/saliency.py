@@ -28,13 +28,11 @@ def compute_saliency_maps(X, y, model):
     images.
     """
 
-    for param in model.parameters():
-        param.requires_grad = False
-
     model.to(device)
 
     # Make sure the model is in "test" mode
     model.eval()
+    model.zero_grad()
 
     # Make input tensor require gradient
     X.requires_grad_()
@@ -88,8 +86,9 @@ def show_saliency_maps(X, y, classes, model, model_name):
         axes[1, i].set_title(classes[preds[i]])
 
     fig.suptitle(model_name)
-    # plt.show()
-    plt.savefig(f"./outputs/visualization/{model_name}.svg", dpi=150)
+    plt.show()
+    # plt.savefig(f"./outputs/visualization/{model_name}.svg", dpi=150)
+    # plt.close()
 
 
 def get_images_list(path):
