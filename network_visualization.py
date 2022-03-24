@@ -14,8 +14,8 @@ y = torch.cat(labels, dim=0).to(device)
 model_list = ["wide_resnet", "vgg", "squeezenet", "shufflenet", "resnext", "resnet", "mobilenet", "googlenet", "efficientnet-b7", "efficientnet-b0", "densenet"]
 
 for model_name in model_list:
-    # model_name =
-    model = initialize_model(model_name, num_classes=15, use_pretrained=True)
+
+    model = initialize_model(model_name, num_classes=15, feature_extract=True, use_pretrained=True)
 
     FILE = f"outputs/models_v2/{model_name}/model.pth"
     checkpoint = torch.load(FILE)
