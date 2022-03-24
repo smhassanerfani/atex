@@ -42,7 +42,7 @@ atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "googlenet"
+model_name = "vgg"
 
 try:
     os.makedirs(os.path.join("./outputs/models_v2", model_name))
@@ -71,7 +71,7 @@ model = model.to(device)
 # print(model)
 # exit()
 
-base_lr = 7.5e-3
+base_lr = 2.5e-4
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=base_lr,
@@ -81,4 +81,4 @@ optimizer = optim.SGD(model.parameters(), lr=base_lr,
 # step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 
 model = train_model(model, model_name, atex,
-                    criterion, optimizer, base_lr, pdlr=True, scheduler=None, num_epochs=30)
+                    criterion, optimizer, base_lr, pdlr=False, scheduler=None, num_epochs=30)
