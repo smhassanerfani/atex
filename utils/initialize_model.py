@@ -114,7 +114,7 @@ def initialize_model(model_name, num_classes, feature_extract=False, use_pretrai
         model_ft = models.mobilenet_v2(pretrained=use_pretrained)
         set_parameter_requires_grad(model_ft, feature_extract)
         num_ftrs = model_ft.classifier[1].in_features
-        model_ft.classifier[1] = nn.Linear(num_ftrs, 15)
+        model_ft.classifier[1] = nn.Linear(num_ftrs, num_classes)
 
     elif model_name == "efficientnet-b0":
         """ EfficientNet-B0
@@ -124,11 +124,42 @@ def initialize_model(model_name, num_classes, feature_extract=False, use_pretrai
             'efficientnet-b0', num_classes=num_classes)
 
     elif model_name == "efficientnet-b7":
-        """ EfficientNet-B0
+        """ EfficientNet-B7
         """
         from efficientnet_pytorch import EfficientNet
         model_ft = EfficientNet.from_pretrained(
             'efficientnet-b7', num_classes=num_classes)
+
+    elif model_name == "efficientnet-v2-s":
+        """ Efficientnet-v2-s 
+        """
+        model_ft = models.efficientnet_v2_s(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs, num_classes)
+    
+    elif model_name == "efficientnet-v2-m":
+        """ Efficientnet-v2-m
+        """
+        model_ft = models.efficientnet_v2_m(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs, num_classes)
+    
+    elif model_name == "efficientnet-v2-l":
+        """ Efficientnet-v2-l
+        """
+        model_ft = models.efficientnet_v2_l(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.classifier[1].in_features
+        model_ft.classifier[1] = nn.Linear(num_ftrs, num_classes)
+
+    elif model_name == "vit-b-16":
+
+        model_ft = models.vit_b_16(pretrained=use_pretrained)
+        set_parameter_requires_grad(model_ft, feature_extract)
+        num_ftrs = model_ft.heads[0].in_features
+        model_ft.heads[0] = nn.Linear(num_ftrs, num_classes)
 
     else:
         print("Invalid model name, exiting...")
