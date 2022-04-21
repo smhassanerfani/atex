@@ -21,18 +21,13 @@ atex = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 class_names = dataset.classes
 # print(class_names)
 
-model_name = "resnet-101"
+model_name = "vgg"
 model = initialize_model(model_name, num_classes=15, use_pretrained=True)
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=1.0e-2,
-                      momentum=0.9, weight_decay=0.0001)
 
-FILE = f"./outputs/models/{model_name}/model.pth"
+FILE = f"./outputs/{model_name}/model.pth"
 
 checkpoint = torch.load(FILE)
 model.load_state_dict(checkpoint['model_state'])
-optimizer.load_state_dict(checkpoint['optimizer_state'])
-# scheduler.load_state_dict(checkpoint['scheduler_state'])
 epoch = checkpoint['epoch']
 
 model.to(device)
