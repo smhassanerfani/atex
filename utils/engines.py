@@ -9,7 +9,7 @@ def csv_writer(model_name, log_list, fieldnames=None):
         fieldnames = ["epoch", "train_loss",
                       "train_acc", "val_loss", "val_acc"]
 
-    with open(f"./outputs/models_v2/{model_name}/loss_acc_results.csv", 'w', newline='') as filehandler:
+    with open(f"./outputs/{model_name}/loss_acc_results.csv", 'w', newline='') as filehandler:
         fh_writer = csv.DictWriter(filehandler, fieldnames=fieldnames)
 
         fh_writer.writeheader()
@@ -136,7 +136,7 @@ def train_model(
                         "best_acc": epoch_acc,
                         # "scheduler_state": scheduler.state_dict()
                     }
-                    save_path = f"./outputs/models_v2/{model_name}/model.pth"
+                    save_path = f"./outputs/{model_name}/model.pth"
                     torch.save(state, save_path)
 
         log_list.append(log_dic)
