@@ -51,8 +51,8 @@ def train_model(
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
-    in_iter = 0
     log_list = list()
+    lr = base_lr
 
     max_iter = num_epochs * len(dataloader["train"].dataset)
     lr_poly = AdjustLearningRate(optimizer, base_lr, max_iter, lr_pp)
