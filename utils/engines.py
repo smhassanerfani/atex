@@ -17,17 +17,22 @@ def csv_writer(model_name, log_list, fieldnames=None):
             fh_writer.writerow(item)
 
 
-def lr_poly(base_lr, iter, max_iter, power):
-    return base_lr * ((1 - float(iter) / max_iter) ** (power))
+class AdjustLearningRate:
+    num_of_iterations = 0
 
+    def __init__(self, optimizer, base_lr, max_iter, power):
+        self.optimizer = optimizer
+        self.base_lr = base_lr
+        self.max_iter = max_iter
+        self.power = power
 
-def adjust_learning_rate(optimizer, base_lr, in_iter, max_iter, power):
-    lr = lr_poly(base_lr, in_iter, max_iter, power)
-    optimizer.param_groups[0]['lr'] = lr
-    if len(optimizer.param_groups) > 1:
-        optimizer.param_groups[1]['lr'] = lr * 10
-    return lr
+    def __call__(self, current_iter):
+        lr = self.base_lr * ((1 - float(current_iter) / self.max_iter) ** self.power)
+        self.optimizer.param_groups[0]['lr'] = lr
+        if len(self.optimizer.param_groups) > 1:
+            self.optimizer.param_groups[1]['lr'] = lr * 10
 
+        return lr
 
 def train_model(
         model,
@@ -48,7 +53,9 @@ def train_model(
     best_acc = 0.0
     in_iter = 0
     log_list = list()
-    lr = base_lr
+
+    max_iter = num_epochs * len(dataloader["train"].dataset)
+    lr_poly = AdjustLearningRate(optimizer, base_lr, max_iter, lr_pp)
 
     for epoch in range(num_epochs):
 
@@ -95,10 +102,11 @@ def train_model(
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
-                        in_iter += inputs.shape[0]
+
+                        # pdlr adjusts the lr based on iterations
                         if pdlr == True:
-                            lr = adjust_learning_rate(
-                                optimizer, base_lr, in_iter, num_epochs * len(dataloader[phase].dataset), lr_pp)
+                            lr_poly.num_of_iterations += len(inputs)
+                            lr = lr_poly(lr_poly.num_of_iterations)
 
                         loss.backward()
                         optimizer.step()
@@ -107,15 +115,15 @@ def train_model(
                 running_loss += loss.item() * inputs.size(0)
                 running_corrects += torch.sum(preds == labels.data)
 
+            # scheduler adjusts the lr based on epochs
             if phase == 'train' and scheduler is not None:
                 scheduler.step()
+                lr = optimizer.param_groups[0]['lr']
 
             epoch_loss = running_loss / len(dataloader[phase].dataset)
-            epoch_acc = running_corrects.double(
-            ) / len(dataloader[phase].dataset)
+            epoch_acc = running_corrects.double() / len(dataloader[phase].dataset)
 
-            print(
-                f'{phase} loss:\t {epoch_loss:.4f}\t acc:\t {epoch_acc:.4f}\t lr:\t {lr:.6f}')
+            print(f'{phase} loss:\t {epoch_loss:.4f}\t acc:\t {epoch_acc:.4f}\t lr:\t {lr:.6f}')
 
             if phase == 'train':
                 log_dic["train_loss"] = epoch_loss
@@ -134,7 +142,6 @@ def train_model(
                         "model_state": model.state_dict(),
                         "optimizer_state": optimizer.state_dict(),
                         "best_acc": epoch_acc,
-                        # "scheduler_state": scheduler.state_dict()
                     }
                     save_path = f"./outputs/{model_name}/model.pth"
                     torch.save(state, save_path)
@@ -143,9 +150,8 @@ def train_model(
         print()
 
     time_elapsed = time.time() - since
-    print('Training complete in {:.0f}m {:.0f}s'.format(
-        time_elapsed // 60, time_elapsed % 60))
-    print(f'Best val Acc: {best_acc:4f}')
+    print(f'Training complete in {time_elapsed // 60:.0f}m {time_elapsed % 60:.0f}s')
+    print(f'Best val Acc: {best_acc:.2%}')
 
     # load best model weights
     model.load_state_dict(best_model_wts)
