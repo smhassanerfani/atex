@@ -39,7 +39,7 @@ data_transforms = {
 
 dataset = {x: ATeX(split=x, transform=data_transforms[x]) for x in [
     'train', 'val']}
-atex = {x: DataLoader(dataset[x], batch_size=256, shuffle=True,
+atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
                       drop_last=False) for x in ['train', 'val']}
 
 # class_names = dataset['train'].classes
@@ -83,11 +83,11 @@ base_lr = 8.50E-03
 
 # criterion = FocalLoss()
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=base_lr,
-                      momentum=0.9, weight_decay=0.0001)
 
-# optimizer = torch.optim.Adam(model.parameters(), lr=2.5e-4)
-# step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
+optimizer = optim.SGD(model.parameters(), lr=base_lr, momentum=0.9, weight_decay=0.0001)
+# optimizer = optim.Adam(model.parameters(), lr=2.5e-4)
+
+step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 model = train_model(model, model_name, atex,
-                    criterion, optimizer, base_lr, pdlr=True, scheduler=None, num_epochs=50)
+                    criterion, optimizer, base_lr, pdlr=True, scheduler=None, num_epochs=5)
