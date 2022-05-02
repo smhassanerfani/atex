@@ -45,19 +45,19 @@ atex = {x: DataLoader(dataset[x], batch_size=128, shuffle=True,
 # class_names = dataset['train'].classes
 # print(class_names)
 
-model_name = "repvgg/RepVGG-A0"
+model_name = "squeezenet"
 
 try:
     os.makedirs(os.path.join("./outputs/", model_name))
 except FileExistsError:
     pass
 
-# model = initialize_model(model_name, num_classes=15, use_pretrained=True)
+model = initialize_model(model_name, num_classes=15, use_pretrained=True)
 
 # model = ResNet101(img_channel=3, num_classes=15)
 
-repvgg_build_func = get_RepVGG_func_by_name("RepVGG-A0")
-model = repvgg_build_func(deploy=False)
+# repvgg_build_func = get_RepVGG_func_by_name("RepVGG-A0")
+# model = repvgg_build_func(deploy=False)
 
 # saved_state_dict = torch.load(RESTORE_FROM)
 #
@@ -79,7 +79,7 @@ model = model.to(device)
 # exit()
 
 # base_lr = 10**random.uniform(-3, -6)
-base_lr = 8.50E-03
+base_lr = 3.5E-03
 
 # criterion = FocalLoss()
 criterion = nn.CrossEntropyLoss()
@@ -87,7 +87,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=base_lr, momentum=0.9, weight_decay=0.0001)
 # optimizer = optim.Adam(model.parameters(), lr=2.5e-4)
 
-step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
+step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.9)
 
 model = train_model(model, model_name, atex,
-                    criterion, optimizer, base_lr, pdlr=True, scheduler=None, num_epochs=5)
+                    criterion, optimizer, base_lr, pdlr=False, scheduler=step_lr_scheduler, num_epochs=30)
