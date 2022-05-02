@@ -79,10 +79,10 @@ model = model.to(device)
 # exit()
 
 # base_lr = 10**random.uniform(-3, -6)
-base_lr = 3.5E-03
+base_lr = 1.6E-02
 
-# criterion = FocalLoss()
-criterion = nn.CrossEntropyLoss()
+criterion = FocalLoss()
+# criterion = nn.CrossEntropyLoss()
 
 optimizer = optim.SGD(model.parameters(), lr=base_lr, momentum=0.9, weight_decay=0.0001)
 # optimizer = optim.Adam(model.parameters(), lr=2.5e-4)
@@ -90,4 +90,4 @@ optimizer = optim.SGD(model.parameters(), lr=base_lr, momentum=0.9, weight_decay
 step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.9)
 
 model = train_model(model, model_name, atex,
-                    criterion, optimizer, base_lr, pdlr=False, scheduler=step_lr_scheduler, num_epochs=30)
+                    criterion, optimizer, base_lr, pdlr=False, scheduler=step_lr_scheduler, num_epochs=50)
