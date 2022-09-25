@@ -76,3 +76,17 @@ Autoencoders are an unsupervised learning technique that we can use to learn eff
 </p>
 
 
+# Reference
+If you use this data, please cite the following paper which can be downloaded through this [link](https://ascelibrary.org/doi/abs/10.1061/%28ASCE%29WR.1943-5452.0001615):
+```
+@article{erfani2022atex,
+  title={ATeX: A Benchmark for Image Classification of Water in Different Waterbodies Using Deep Learning Approaches},
+  author={Erfani, Seyed Mohammad Hassan and Goharian, Erfan},
+  journal={Journal of Water Resources Planning and Management},
+  volume={148},
+  number={11},
+  pages={04022063},
+  year={2022},
+  publisher={American Society of Civil Engineers}
+}
+```
