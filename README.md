@@ -51,7 +51,7 @@ We used t-Distributed Stochastic Neighbor Embedding ([t-SNE](https://lvdmaaten.g
 ## Experimental Rsults
 Three common performance metrics including Precision, Recall and F1-score are reported to evaluate the performance of the models on ATeX. Table 1 shows weighted average (averaging the support-weighted mean per label) of these three metrics on the test set. Accordingly, EffNet-B7, EffNet-B0 and ShuffleNet V2x1.0 provide the best results. Considering training time, ShuffleNet V2x1.0 can be presented as the most efficient network.
 
-Table 1. The perfomance result on ATeX test set by well-known classification models.
+Table 1. The performance result on ATeX test set by well-known classification models.
 | Networks           | Training Time [h:mm:ss] | Learning Rate | Epochs | Accuracy  (Val) | Precision | Recall | F1-score |
 |--------------------|-------------------------|---------------|--------|-----------------|-----------|--------|----------|
 | Wide ResNet-50-2   | 0:06:56                 | 2.50E-04      | 30     | 91              | 77        | 75     | 75       |
