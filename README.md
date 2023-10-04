@@ -6,16 +6,16 @@ This is the repository for the ATeX Dataset. All labels are comprehensively desc
 </p>
 
 ## Overview
-ATeX is a new benchmark for classification and texture analysis of water in different waterbodies. This dataset has covered a wide range of waterbodies such as sea, lake, river, swamp, glacier. ATeX includes patches with 32 x 32 pixels of 15 waterbodies. ATeX consists of 12,503 patches split into 8,753 for training, 1,252 for validation and 2,498 for testing.
+ATeX is a new benchmark for classification and texture analysis of water in different waterbodies. This dataset has covered a wide range of waterbodies such as sea, lake, river, swamp, glacier. ATeX includes patches with 32 x 32 pixels of 15 waterbodies. ATeX consists of 12,503 patches split into 8,753 for training, 1,252 for validation, and 2,498 for testing.
 
 ## Dataset Description
 Water does not preserve the same texture and visual features in all forms and situations. Some physical and chemical properties of water have an effect on water's appearance in different waterbodies. Turbidity, color, temperature, suspended living matter, mineral particles, and dissolved chemical substances are those water characteristics playing a role in water appearance, while water depth and flowrate are those dictated by the flow regime having a direct effect on water turbulence. Water is also a reflective surface. In laminar flow or still water, depending on ambient light, the reflection effect can be dominant while in turbulent flow because of existing coherent flow structures such as eddies, turbulent bursting, and unsteady vortices of many sizes, the reflection becomes distorted. Moreover, turbulent regime plays a critical role in terms of accretion and transport of sediment as well as contaminant mixing and dispersion in rivers having a direct effect on water turbidity and visual appearance.
 
-Considering the combination of the aforementioned water properties, water can appear in completely different forms in various waterbodies. The ATeX dataset is designed and developed with the goal of representing the texture appearance that water usually bears in different waterbodies. ATeX images are derived from ATLANTIS (ArTificiaL And Natural waTer-bodIes dataSet). ATLANTIS is a semantic segmentation dataset including 5,195 pixel-wise annotated images that covers a wide range of natural and artificial waterbodies such as sea, lake, river, reservoir, canal, pier, peline. Figure 2 shows the pipeline through which the ATeX images are cropped from ATLANTIS images. As shown in Figure 2 (STEP 3) there is no partial overlap between any two patches.
+Considering the combination of the aforementioned water properties, water can appear in completely different forms in various waterbodies. The ATeX dataset is designed and developed with the goal of representing the texture appearance that water usually bears in different waterbodies. ATeX images are derived from ATLANTIS (ArTificiaL And Natural waTer-bodIes dataSet). ATLANTIS is a semantic segmentation dataset including 5,195 pixel-wise annotated images that covers a wide range of natural and artificial waterbodies such as sea, lake, river, reservoir, canal, pier, and pipeline. Figure 2 shows the pipeline through which the ATeX images are cropped from ATLANTIS images. As shown in Figure 2 (STEP 3) there is no partial overlap between any two patches.
 
 <p align="center">
   <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_pipeline.png">
-  Figure 2. ATeX patches are derived from ATLANTIS. The boundary waterbodies are determined from images using corresponding ground-truth masks (STEP 1), then the irrelevant pixels are cut based on waterbodies' coordination (STEP 2), and finally the outputs are cropped 32 x 32 to create ATeX patches (STEP 3).
+  Figure 2. ATeX patches are derived from ATLANTIS. The boundary waterbodies are determined from images using corresponding ground-truth masks (STEP 1), then the irrelevant pixels are cut based on waterbodies' coordination (STEP 2), and finally, the outputs are cropped 32 x 32 to create ATeX patches (STEP 3).
 </p>
 
 ## Dataset Statistics
@@ -89,7 +89,6 @@ If you use this data, please cite the following paper which can be downloaded th
   year={2022},
   publisher={American Society of Civil Engineers}
 }
-
 @article{erfani2023vision,
   title={Vision-based texture and color analysis of waterbody images using computer vision and deep learning techniques},
   author={Erfani, Seyed Mohammad Hassan and Goharian, Erfan},
