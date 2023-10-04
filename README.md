@@ -1,5 +1,5 @@
 # ATeX - [ATLANTIS](https://github.com/smhassanerfani/atlantis) TeXture Dataset
-This is the respository for the ATeX Dataset. All labels are comprehensively described in [ATeX Wiki](https://github.com/smhassanerfani/atex/wiki).
+This is the repository for the ATeX Dataset. All labels are comprehensively described in [ATeX Wiki](https://github.com/smhassanerfani/atex/wiki).
 <p align="center">
   <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_samples.svg">
   Figure 1. ATeX: ATLANTIS TeXture dataset.
@@ -9,13 +9,13 @@ This is the respository for the ATeX Dataset. All labels are comprehensively des
 ATeX is a new benchmark for classification and texture analysis of water in different waterbodies. This dataset has covered a wide range of waterbodies such as sea, lake, river, swamp, glacier. ATeX includes patches with 32 x 32 pixels of 15 waterbodies. ATeX consists of 12,503 patches split into 8,753 for training, 1,252 for validation and 2,498 for testing.
 
 ## Dataset Description
-Water does not preserve same texture and visual features in all forms and situations. Some physical and chemical properties of water have effect on water appearance in different waterbodies. Turbidity, color, temperature, suspended living matter, mineral particles and dissolved chemical substances are those water characteristics playing role in water appearance, while water depth and flowrate are those dictated from flow regime having direct effect on water turbulence. Water is also a reflective surface. In laminar flow or still water, depending on ambient light, the reflection effect can be dominant while in turbulent flow because of existing coherent flow structures such as eddies, turbulent bursting, and unsteady vortices of many sizes the reflection becomes distorted. Moreover, turbulent regime plays a critical role in terms of accretion and transport of sediment as well as contaminant mixing and dispersion in rivers having direct effect on water turbidity and visual appearance.
+Water does not preserve the same texture and visual features in all forms and situations. Some physical and chemical properties of water have an effect on water's appearance in different waterbodies. Turbidity, color, temperature, suspended living matter, mineral particles, and dissolved chemical substances are those water characteristics playing a role in water appearance, while water depth and flowrate are those dictated by the flow regime having a direct effect on water turbulence. Water is also a reflective surface. In laminar flow or still water, depending on ambient light, the reflection effect can be dominant while in turbulent flow because of existing coherent flow structures such as eddies, turbulent bursting, and unsteady vortices of many sizes, the reflection becomes distorted. Moreover, turbulent regime plays a critical role in terms of accretion and transport of sediment as well as contaminant mixing and dispersion in rivers having a direct effect on water turbidity and visual appearance.
 
-Considering the combination of the aforementioned water properties, water can appear in completely different forms in various waterbodies. The ATeX dataset is designed and developed with the goal of representing texture appearance which water usually bears in different waterbodies. ATeX images are derived from ATLANTIS (ArTificiaL And Natural waTer-bodIes dataSet). ATLANTIS is a semantic segmentation dataset including 5,195 pixel-wise annotated images which covers a wide range of natural and artificial waterbodies such as sea, lake, river, reservoir, canal, pier, peline. Figure 2 shows the pipeline through which the ATeX images are cropped from ATLANTIS images. As it is showed in Figure 2 (STEP 3) there is no partial overlap between any two patches.
+Considering the combination of the aforementioned water properties, water can appear in completely different forms in various waterbodies. The ATeX dataset is designed and developed with the goal of representing the texture appearance that water usually bears in different waterbodies. ATeX images are derived from ATLANTIS (ArTificiaL And Natural waTer-bodIes dataSet). ATLANTIS is a semantic segmentation dataset including 5,195 pixel-wise annotated images that covers a wide range of natural and artificial waterbodies such as sea, lake, river, reservoir, canal, pier, peline. Figure 2 shows the pipeline through which the ATeX images are cropped from ATLANTIS images. As shown in Figure 2 (STEP 3) there is no partial overlap between any two patches.
 
 <p align="center">
   <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/atex_pipeline.png">
-  Figure 2. ATeX patches are derived from ATLANTIS. The boundary waterbodies are determined from images using correspoing ground-truth masks (STEP 1), then the irrelevant pixels are cut based on waterbodies' coordination (STEP 2), finally the outputs are cropped 32 x 32 to create ATeX patches (STEP 3).
+  Figure 2. ATeX patches are derived from ATLANTIS. The boundary waterbodies are determined from images using corresponding ground-truth masks (STEP 1), then the irrelevant pixels are cut based on waterbodies' coordination (STEP 2), and finally the outputs are cropped 32 x 32 to create ATeX patches (STEP 3).
 </p>
 
 ## Dataset Statistics
@@ -27,7 +27,7 @@ Figure 3 shows the frequency distribution of the number of images for waterbody 
 </p>
 
 ## ATeX Visualization
-We used t-Distributed Stochastic Neighbor Embedding ([t-SNE](https://lvdmaaten.github.io/tsne/)), Linear Auto Encoder (AE), Linear Discriminant Analysis ([LDA](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html)) and Principal Component Analysis ([PCA](https://www.youtube.com/watch?v=52d7ha-GdV8&list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E&index=11)) for dimensionality reduction. All of these methods are well suited for the visualization of high-dimensional datasets. In order to achieve better results, images of train set are first passed into the feature layers of [ShuffleNet v2](https://arxiv.org/abs/1807.11164) (pre-trained on ImageNet and fine-tuned on ATeX), then the output results were fed into the features reduction models. Figure 4 (a) shows animation for the t-SNE result on features extracted form ShuffleNet V2x1.0, Figure 4 (b) shows animation for the AE result on those. Figure 4 (c) and (d) are the results for LDA and PCA, respectively.
+We used t-Distributed Stochastic Neighbor Embedding ([t-SNE](https://lvdmaaten.github.io/tsne/)), Linear Auto Encoder (AE), Linear Discriminant Analysis ([LDA](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html)) and Principal Component Analysis ([PCA](https://www.youtube.com/watch?v=52d7ha-GdV8&list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E&index=11)) for dimensionality reduction. All of these methods are well-suited for the visualization of high-dimensional datasets. In order to achieve better results, images of the train set are first passed into the feature layers of [ShuffleNet v2](https://arxiv.org/abs/1807.11164) (pre-trained on ImageNet and fine-tuned on ATeX), then the output results were fed into the features reduction models. Figure 4 (a) shows animation for the t-SNE result on features extracted from ShuffleNet V2x1.0, and Figure 4 (b) shows animation for the AE result on those. Figure 4 (c) and (d) are the results for LDA and PCA, respectively.
 
 <TABLE>
   <TR>
@@ -48,8 +48,8 @@ We used t-Distributed Stochastic Neighbor Embedding ([t-SNE](https://lvdmaaten.g
   </TR>
 </TABLE>
 
-## Experimental Rsults
-Three common performance metrics including Precision, Recall and F1-score are reported to evaluate the performance of the models on ATeX. Table 1 shows weighted average (averaging the support-weighted mean per label) of these three metrics on the test set. Accordingly, EffNet-B7, EffNet-B0 and ShuffleNet V2x1.0 provide the best results. Considering training time, ShuffleNet V2x1.0 can be presented as the most efficient network.
+## Experimental Results
+Three common performance metrics including Precision, Recall, and F1-score are reported to evaluate the performance of the models on ATeX. Table 1 shows the weighted average (averaging the support-weighted mean per label) of these three metrics on the test set. Accordingly, EffNet-B7, EffNet-B0, and ShuffleNet V2x1.0 provide the best results. Considering training time, ShuffleNet V2x1.0 can be presented as the most efficient network.
 
 Table 1. The performance result on ATeX test set by well-known classification models.
 | Networks           | Training Time [h:mm:ss] | Learning Rate | Epochs | Accuracy  (Val) | Precision | Recall | F1-score |
@@ -68,7 +68,7 @@ Table 1. The performance result on ATeX test set by well-known classification mo
 
 ### Convolutional Autoencoder
 
-Autoencoders are an unsupervised learning technique that we can use to learn efficient data encodings. Basically, autoencoders can learn to map input data to the output data. While doing so, they learn to encode the data. And the output is the compressed representation of the input data ([Autoencoders in Deep Learning](https://debuggercafe.com/autoencoders-in-deep-learning/)). We developed Convolutional Autoencoder including three encoder and three decoder 2D convolution layers. 
+Autoencoders are an unsupervised learning technique that we can use to learn efficient data encodings. Basically, autoencoders can learn to map input data to the output data. While doing so, they learn to encode the data. And the output is the compressed representation of the input data ([Autoencoders in Deep Learning](https://debuggercafe.com/autoencoders-in-deep-learning/)). We developed a Convolutional Autoencoder including three encoder and three decoder 2D convolution layers. 
 
 <p align="center">
   <img width="100%" height="100%" src="https://github.com/smhassanerfani/atex/blob/main/wiki/on_img_ae_results.svg">
@@ -88,5 +88,16 @@ If you use this data, please cite the following paper which can be downloaded th
   pages={04022063},
   year={2022},
   publisher={American Society of Civil Engineers}
+}
+
+@article{erfani2023vision,
+  title={Vision-based texture and color analysis of waterbody images using computer vision and deep learning techniques},
+  author={Erfani, Seyed Mohammad Hassan and Goharian, Erfan},
+  journal={Journal of Hydroinformatics},
+  volume={25},
+  number={3},
+  pages={835--850},
+  year={2023},
+  publisher={IWA Publishing}
 }
 ```
